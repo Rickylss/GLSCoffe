@@ -1,0 +1,13 @@
+<!--pages/order/order.wxml-->
+<view class='order'>
+  <view style='text-align: center; width: 100%; padding: 30% 0;' wx:if="{{!hasOrder}}">
+    <text>暂无订单信息</text>
+  </view>
+  <view style='text-align: center; width: 100%; padding: 30% 0;' wx:else>
+    <text>订单</text>
+  </view>
+</view>
+
+<view class="startOrder" bindtap='tapOrder' wx:if="{{!hasOrder}}">
+  <view style='color: #ffffff'>开始点单</view>
+</view>

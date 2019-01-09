@@ -1,0 +1,25 @@
+/* pages/Ricky/Ricky.wxss */
+.Ricky {
+  margin: 10% 0;
+  margin-bottom: 5%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.about {
+  width: 85%;
+  padding: 50% 0;
+  margin: 0 auto;
+  border: 2rpx solid #ffffff;
+  border-radius: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rpx #888888;
+}

@@ -1,0 +1,41 @@
+<!--pages/my/my.wxml-->
+<view class="profile" bindtap="goLogin">
+  <image class="profile_avatar" src="{{userInfo.avatarUrl}}"></image>
+  <view class="profile_info">
+    <text class="profile_info_name">{{userInfo.nickName}}</text>
+  </view>
+</view>
+
+<view class="userCenter">
+  <view class='userCenter_cell' bindtap='tapAddress'>
+    <view class='userCenter_cell_tag'>
+      <view class='icon iconfont icon-dizhi'></view>
+      <text class='userCenter_cell_font'>地址</text>
+    </view>
+    <view class='icon iconfont icon-more'></view>
+  </view>
+  <view class='line'></view>
+  <view class='userCenter_cell' bindtap='tapInvoice'>
+    <view class='userCenter_cell_tag'>
+      <view class='icon iconfont icon-fapiao'></view>
+      <text class='userCenter_cell_font'>发票</text>
+    </view>
+    <view class='icon iconfont icon-more'></view>
+  </view>
+  <view class='line'></view>
+  <view class='userCenter_cell' bindtap='tapCustomer'>
+    <view class='userCenter_cell_tag'>
+      <view class='icon iconfont icon-kefu'></view>
+      <text class='userCenter_cell_font'>客服</text>
+    </view>
+    <view class='icon iconfont icon-more'></view>
+  </view>
+  <view class='line'></view>
+  <view class='userCenter_cell' bindtap='tapAbout'>
+    <view class='userCenter_cell_tag'>
+      <view class='icon iconfont icon-about'></view>
+      <text class='userCenter_cell_font'>关于</text>
+    </view>
+    <view class='icon iconfont icon-more'></view>
+  </view>
+</view>

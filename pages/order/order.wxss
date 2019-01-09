@@ -1,0 +1,23 @@
+/* pages/order/order.wxss */
+@import'/styles/iconfont.wxss';
+
+.order {
+  width: 85%;
+  margin: 10% auto;
+  border: 1rpx solid #ffffff;
+  border-radius: 30rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rpx #888888;
+}
+
+.startOrder {
+  margin: 0 auto;
+  height: 70rpx;
+  width: 85%;
+  border: 1rpx solid rgb(183, 108, 37);
+  border-radius: 30rpx;
+  background-color: rgb(183, 108, 37);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

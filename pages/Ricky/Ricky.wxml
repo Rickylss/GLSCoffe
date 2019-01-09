@@ -1,0 +1,9 @@
+<!--pages/Ricky/Ricky.wxml-->
+<view class='Ricky'>
+  <image class='img' src="/images/avatar.png" />
+</view>
+
+<view class='about'>
+
+</view>
+

@@ -1,0 +1,21 @@
+/* pages/about/about.wxss */
+@import'/styles/iconfont.wxss';
+
+.about {
+  width: 85%;
+  padding: 68% 0;
+  margin: 10% auto;
+  margin-bottom: 4%;
+  border: 2rpx solid #ffffff;
+  border-radius: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rpx #888888;
+}
+
+.copyright {
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 400;
+  bottom: 5%;
+}

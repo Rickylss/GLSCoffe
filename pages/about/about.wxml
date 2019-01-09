@@ -1,0 +1,7 @@
+<!--pages/about/about.wxml-->
+
+<view class='about'>
+
+</view>
+
+<view class='copyright' bindtap='tapCopyright'>Copyright <i class='icon iconfont icon-copyright'/> Ricky 2018</view>

@@ -2,8 +2,7 @@
 @import "/styles/iconfont.wxss";
 
 .tag {
-  border: 1rpx solid #efefef;
-  border-bottom: #ffffff;
+  border: 0rpx solid #efefef;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
   margin: 0 auto;
@@ -45,7 +44,7 @@
   margin: 0 auto;
   width: 96%;
   background-color: #ffffff;
-  border: 1rpx solid #efefef;
+  border: 0rpx solid #efefef;
   border-bottom-left-radius: 20rpx;
   border-bottom-right-radius: 20rpx;
 }

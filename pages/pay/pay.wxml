@@ -22,7 +22,7 @@
   </view>
   <view class="takeself" hidden="{{switchShowUp}}">
     <view class='takeself_shopLocation'>{{shopLocation}}</view>
-    <map id="coffeMap" class="takeself_map" subkey="{{mapInfo.tencentMap}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{{mapInfo.scale}}" show-location="true" markers="{{mapInfo.shopInfo}}" bindtap='bindShowFullMap'/>
+    <map id="coffeMap" class="takeself_map" subkey="{{mapInfo.tencentMap}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{{mapInfo.scale}}" show-location="true" markers="{{mapInfo.shopInfo}}"  bindtap='bindShowFullMap'/>
     <view class="takeself_cell">
       <view class="takeself_time_cell" bindtap='choseTime'>
         <view class='takeself_font'>自取时间:</view>
@@ -48,7 +48,7 @@
   </view>
   <view class='cut_line'/>
   <view class='remark_cell'>
-    <textarea class="remarks" value="{{remarks}}" maxlength="30" bindinput='bindRemarksInput' auto-height="true" placeholder="{{remarkPlaceholder}}" />
+    <textarea class="remarks" value="{{remarks}}" maxlength="30" bindinput='bindRemarksInput' auto-height="true" placeholder="{{remarkPlaceholder}}"/>
     <view class="remarks_count">{{remarks.length}}/30字</view>
   </view>
 </view>

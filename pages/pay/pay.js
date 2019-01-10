@@ -5,6 +5,8 @@ var QQMapWX = require('../../lib/qqmap-wx-jssdk.js');
 var qqmapsdk;
 var mapID = "coffeMap";
 var defaultScale = 14;
+var shopLatitude = '28.688697871245807';
+var shopLongitude = '115.97130918514567';
 
 Page({
 
@@ -13,7 +15,7 @@ Page({
    */
   data: {
     winHeight: 0,
-    switchShowUp: false,
+    switchShowUp: true,
     addressInfo: {},
     sendTime: "立即送出",
     arriveTime: "已送达",
@@ -31,18 +33,27 @@ Page({
     remarkPlaceholder: "饮品中规格可参阅订单中的显示，若有其他要求，请说明。",
     shopLocation: '虹桥客运站',
     takeselfTime: '12:00',
-    takeselfPhone: '18270882019',
+    takeselfPhone: '123456789',
+    mapInitReady: false,
     mapInfo: {
       tencentMap: constant.tencentAk,
       longitude: '',
       latitude: '',
       scale: defaultScale,
       showFullMap: false,
+      circles: [{
+        latitude: shopLatitude,
+        longitude: shopLongitude,
+        color: '#7cb5ec88',
+        fillColor: '#7cb5ec88',
+        radius: 1769,
+        strokeWidth: 1
+      }],
       shopInfo: [{
         iconPath: '../../images/dog-select.png',
         id:0,
-        longitude: '115.97130918514567',
-        latitude: '28.688697871245807',
+        latitude: shopLatitude,
+        longitude: shopLongitude,
         width:50,
         height:50,
         callout:{
@@ -66,7 +77,6 @@ Page({
     this.setData({
       winHeight: wx.getSystemInfoSync().windowHeight*0.08,
     });
-    this.scopeSetting();
   },
 
   /**
@@ -154,7 +164,7 @@ Page({
           if (distance < 1000) {
             var distanceStr = "距您" + distance + "m";
           } else {
-            var distanceStr = "距您" + (distance % 1000) + "km";
+            var distanceStr = "距您" + ((distance*1.000) / 1000) + "km";
           }
           that.setData({
             'mapInfo.shopInfo[0].callout.content' : distanceStr,
@@ -196,6 +206,13 @@ Page({
    */
   bindTakeself: function() {
     if (this.data.switchShowUp) {
+      if (!this.data.mapInitReady){
+        this.setData({
+          switchShowUp: false,
+          mapInitReady: true,
+        });
+        this.scopeSetting();
+      }
       this.setData({
         switchShowUp: false,
       });

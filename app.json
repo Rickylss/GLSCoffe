@@ -11,9 +11,9 @@
     "pages/auth/register/register",
     "pages/auth/reset/reset",
 
-    "pages/ordercenter/index/index",
-    "pages/ordercenter/order/order",
 
+    "pages/ordercenter/order/order",
+    "pages/ordercenter/index/index",
     "pages/ucenter/index/index",
     "pages/ucenter/address/address",
     "pages/ucenter/address/setAddress/setAddress",

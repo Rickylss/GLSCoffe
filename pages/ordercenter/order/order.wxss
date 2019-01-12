@@ -1,5 +1,6 @@
 /* pages/order/order.wxss */
-@import'/styles/iconfont.wxss';
+@import "../../../styles/iconfont.wxss";
+@import "../../loading/loading.wxss";
 
 .is_finished {
   color: rgb(183, 108, 37);
@@ -29,8 +30,7 @@
   width: 85%;
   background-color: #ffffff;
   border: 0rpx solid #efefef;
-  border-bottom-left-radius: 20rpx;
-  border-bottom-right-radius: 20rpx;
+  border-radius: 20rpx;
 }
 
 .cut_line {
@@ -99,6 +99,15 @@
 
 .order_info {
   width: 100%;
+}
+
+.order_info_cost_cell {
+  margin: 20rpx auto;
+  width: 94%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .order_info_cell {

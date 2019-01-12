@@ -7,10 +7,14 @@ const tencentAk = 'J6LBZ-EDJKO-VHCWA-SOX3M-GDKP5-PVFP7';
 const shopLatitude = '28.688697871245807';
 const shopLongitude = '115.97130918514567';
 const shopLocation = shopLatitude +','+ shopLongitude;
+const shopLocationStr = "杭州西湖橄榄山咖啡";
 const defaultScale = 14;
+const mapID = "coffeMap";
 
 module.exports = {
   tencentAk: tencentAk,
   shopLocation: shopLocation,
   defaultScale: defaultScale,
+  shopLocationStr: shopLocationStr,
+  mapID: mapID,
 }

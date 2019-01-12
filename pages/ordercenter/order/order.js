@@ -4,49 +4,43 @@ var map = require("../../../utils/map.js");
 var constant = require("../../../utils/constant.js");
 var util = require("../../../utils/util.js")
 
-var mapID = "coffeMap";
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    finished: false,
-    finished_text: '订单已完成',
-
-    takeselfTime: "12:00",
-    takeselfPhone: "121313432325",
-
-    showOrderType: false,
-    orderType: "外卖配送",
-    sendTime: "立即送出",
-    arriveTime: "已送达",
-    remark: "多放点盐你好我好大家好大家好大家好大家好大家好你好我好大家我号",
-    invoiceInfo: {
-      type: '0',
-      title: '航天鄱湖云科技有限公司',
-      taxNumber: '21352352364236f',
-      companyAddress: '',
-      telephone: '',
-      bankName: '',
-      bankAccount: '',
+    mapInfo: {
+      latitude: '',
+      longitude: '',
+      subKey: constant.tencentAk,
+      mapID: constant.mapID,
+      scale: constant.defaultScale,
+      shopLocation: constant.shopLocationStr,
+      shopInfo: [{
+        iconPath: '../../../images/dog-select.png',
+        id: 0,
+        latitude: constant.shopLatitude,
+        longitude: constant.shopLongitude,
+        width: 50,
+        height: 50,
+        callout: {
+          display: 'ALWAYS',
+          fontSize: 16,
+          borderRadius: 10,
+          borderColor: "#000000",
+          bgColor: "#ffffff",
+          padding: 10,
+          textAlign: 'center',
+          content: "",
+        },
+      }],
     },
-    address: {
-      location: '南昌大学',
-      name: '黄(女士)',
-      phone: '123456789',
+    orderInfo: {},
+    loading: {
+      loadingShow: true,
+      loadingError: false,
     },
-    orderInfo: [
-      { name: "coffee", cost: "9.00", amount: "1", remark: "少糖+加冰" },
-      { name: "boo", cost: "15.00", amount: "1", remark: "少糖" },
-      { name: "jiuce", cost: "15.00", amount: "1", remark: "少糖" },
-      { name: "jiuce", cost: "34.00", amount: "34", remark: "少糖+加冰" },
-      { name: "jiuce", cost: "20.00", amount: "4", remark: "少糖" },
-      { name: "kill", cost: "3.00", amount: "1", remark: "少糖" },
-      { name: "jiuce", cost: "76.00", amount: "4", remark: "少糖" },
-      { name: "laaa", cost: "34.00", amount: "4", remark: "少糖" }
-    ],
   },
 
   /**
@@ -54,31 +48,93 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options.id);
-    util.request(api.GetOrderById,
-      {
-        user: wx.getStorageSync("userInfo").userId,
-        orderId: options.id,
-      }, "POST").then((res) => {
-        if (res) {
+    if(options.id){
+      util.request(api.GetOrderById,
+        {
+          user: wx.getStorageSync("userInfo").userId,
+          orderId: options.id,
+        }, "POST").then((res) => {
+          if (res) {
+            that.setData({
+              orderInfo: res,
+              'loading.loadingShow': false,
+              'loading.loadingError': false,
+            });
+          }
+          if (!res.finished && 0 == res.orderType) {
+            that.getUserLocation();
+          }
+
+        }).catch((err)=>{
+          console.log(err);
           that.setData({
-            finished: res.isFinished,
-            showOrderType: res.orderType,
-            orderinfo: res.orderInfo,
+            'loading.loadingShow': false,
+            'loading.loadingError': true,
           });
+        });
+    }
+
+  },
+
+  /**
+   * 获取当前地址
+   */
+  getUserLocation: function() {
+    var that = this;
+    map.scopeSetting().then(()=>{
+      that.initMap().then(()=>{
+        var localAddress = {
+          latitude: that.data.mapInfo.latitude, 
+          longitude: that.data.mapInfo.longitude
+          };
+        map.calculateDistance(localAddress).then((res)=>{
+          if (res < 1000) {
+            var distanceStr = "距您" + res + "m";
+          } else {
+            var distanceStr = "距您" + ((res * 1.000) / 1000) + "km";
+          }
+          that.setData({
+            'mapInfo.shopInfo[0].callout.content': distanceStr,
+          });
+        });
+      });
+    }).catch((err)=>{
+      console.log(err);
+    });
+  },
+
+  /**
+   * 初始化地图
+   */
+  initMap: function() {
+    var that = this;
+    return new Promise(function(resolve, reject){
+      wx.getLocation({
+        type: 'gcj02',
+        success: function (res) {
+          that.setData({
+            'mapInfo.latitude': res.latitude,
+            'mapInfo.longitude': res.longitude,
+          });
+          console.log(that.data.mapInfo);
+          var mapCtx = wx.createMapContext(that.data.mapInfo.mapID);
+          mapCtx.moveToLocation();
+          resolve();
+        },
+        fail: function (err) {
+          reject(err);
+          console.log(err);
         }
-      }).catch();
+      })
+    });
+  },
 
-    if (!this.data.finished) {
-      this.setData({
-        finished_text: "订单进行中",
-      });
-    }
-
-    if (!this.data.showOrderType) {
-      this.setData({
-        orderType: "到店自取",
-      });
-    }
+  /**
+   * 显示大地图
+   */
+  bindShowFullMap: function() {
+    wx.navigateTo({
+      url: '/pages/shopcenter/map/map',
+    })
   },
 })

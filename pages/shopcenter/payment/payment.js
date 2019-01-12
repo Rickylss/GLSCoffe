@@ -35,25 +35,16 @@ Page({
     takeselfPhone: '123456789',
     mapInitReady: false,
     mapInfo: {
-      shopLocation: '',
-      tencentMap: constant.tencentAk,
-      longitude: '',
       latitude: '',
-      scale: defaultScale,
-      showFullMap: false,
-      circles: [{
-        latitude: shopLatitude,
-        longitude: shopLongitude,
-        color: '#7cb5ec88',
-        fillColor: '#7cb5ec88',
-        radius: 1769,
-        strokeWidth: 1
-      }],
+      longitude: '',
+      subKey: constant.tencentAk,
+      mapID: constant.mapID,
+      scale: constant.scale,
       shopInfo: [{
         iconPath: '../../../images/dog-select.png',
         id: 0,
-        latitude: shopLatitude,
-        longitude: shopLongitude,
+        latitude: constant.shopLatitude,
+        longitude: constant.shopLongitude,
         width: 50,
         height: 50,
         callout: {

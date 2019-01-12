@@ -123,7 +123,6 @@ function regeocodingAddress(localAddress) {
 
 module.exports = {
   scopeSetting,
-  initMap,
   calculateDistance,
   regeocodingAddress,
 };

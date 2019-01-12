@@ -20,6 +20,7 @@ Page({
       loadingShow: true,
       loadingError: false,
     },
+    gotLocation: false,
   },
 
   /**
@@ -61,7 +62,7 @@ Page({
       this.getAddressInfo();
     }
 
-    if(this.data.isAdd){
+    if(this.data.isAdd && !this.data.gotLocation){
       this.getUserLocation().then(()=>{
         this.setData({
           'loading.loadingShow': false,
@@ -73,6 +74,14 @@ Page({
           'loading.loadingError': true,
         });
       });
+    }
+  },
+
+  onHide: function() {
+    if(!this.data.gotLocation){
+      this.setData({
+        gotLocation: true,
+      })
     }
   },
 
@@ -288,6 +297,59 @@ Page({
     this.setData({
       'addressInfo.region': e.detail.value,
       'addressInfo.address': '',
+    })
+  },
+
+  /**
+   * 从微信地址中添加地址
+   */
+  addAddressFromWX: function(){
+    util.getSetting().then((res)=>{
+      if (!res.authSetting['scope.address']){
+        util.authorize("scope.address").then((res)=>{
+          this.addAddressByWX();
+        }).catch(()=>{
+          wx.showModal({
+            title: '提示',
+            content: '获取微信地址失败，您未开启地址权限，点击开启',
+            success: function (res) {
+              if (res.confirm) {
+                wx.openSetting({
+                  success: function (res) {
+                    if (res.authSetting['scope.address']) {
+                      this.addAddressByWX();
+                    } else {
+                      console.log("用户未同意微信地址权限");
+                    }
+                  }
+                });
+              }
+            }
+          })
+        });
+      }else{
+        this.addAddressByWX();
+      }
+    });
+  },
+
+  /**
+   * 设置微信地址至本地
+   */
+  addAddressByWX: function(){
+    var that = this;
+    wx.chooseAddress({
+      success: function (res) {
+        that.setData({
+          "addressInfo.costomerName": res.userName,
+          "addressInfo.phoneNumber": res.telNumber,
+          "addressInfo.region": [res.provinceName,res.cityName,res.countyName],
+          "addressInfo.address": res.detailInfo,
+        });
+      },
+      fail: function (err) {
+        console.log(err);
+      },
     })
   },
 })

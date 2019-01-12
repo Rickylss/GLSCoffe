@@ -8,6 +8,18 @@
   right: 5%;
 }
 
+.address_addfrom_wx {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: rgb(183, 108, 37);
+  padding: 4rpx 15rpx;
+  border-radius: 30rpx;
+  position: fixed;
+  top: 6rpx;
+  right: 5%;
+}
+
 .setaddress {
   margin: 60rpx auto;
   width: 90%;

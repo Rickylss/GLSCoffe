@@ -2,6 +2,9 @@
 <include src="../../../loading/loading.wxml"/>
 
 <view class='address_minus icon iconfont icon-minus'  wx:if="{{!isAdd}}" bindtap='deleteAddress'/>
+<view class='address_addfrom_wx' wx:else bindtap='addAddressFromWX'>
+从微信地址添加
+</view>
 
 <view class='setaddress'>
 

@@ -1,6 +1,6 @@
 /**index.wxss**/
 @import '/styles/iconfont.wxss';
-@import '/styles/loading.wxss';
+@import '../loading/loading.wxss';
 
 .banner {
   margin-top: 6%;

@@ -1,0 +1,238 @@
+/* pages/order/order.wxss */
+@import'/styles/iconfont.wxss';
+
+.is_finished {
+  color: rgb(183, 108, 37);
+  font-size: 40rpx;
+  margin-left: 7.5%;
+  margin-top: 30rpx;
+}
+
+.order_type {
+  margin: 0 auto;
+  width: 85%;
+  background-color: #ffffff;
+  border: 0rpx solid #ffffff;
+  border-top-right-radius: 20rpx;
+  border-top-left-radius: 20rpx;
+  font-size: 35rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-weight: 600;
+  color: rgb(183, 108, 37);
+  margin-top: 3%;
+}
+
+.container {
+  margin: 0 auto;
+  width: 85%;
+  background-color: #ffffff;
+  border: 0rpx solid #efefef;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+}
+
+.cut_line {
+  background-color: #efefef;
+  width: 100%;
+  height: 20rpx;
+}
+
+.takeaway {
+  width: 100%;
+  overflow: hidden;
+}
+
+.address {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.address_location {
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-left: 4%;
+  margin-right: 1%;
+}
+
+.address_text {
+  font-size: 30rpx;
+  margin-left: 4%;
+}
+
+.dividing_line {
+  border-bottom: 2rpx solid #efefef;
+  width: 90%;
+  margin: 10rpx auto;
+}
+
+.order_time {
+  height: 70rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.send_time {
+  margin-left: 4%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+}
+
+.arrive_time {
+  color: rgb(183, 108, 37);
+  margin-right: 4%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+}
+
+.order_info {
+  width: 100%;
+}
+
+.order_info_cell {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  height: 120rpx;
+  border-bottom: 2rpx solid #efefef;
+}
+
+.order_info_more {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.order_info_more_name {
+  margin-left: 20rpx;
+  font-size: 35rpx;
+}
+
+.order_info_more_remark {
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  font-size: 22rpx;
+  opacity: 0.5;
+}
+
+.number_font_1 {
+  text-align: center;
+  width: 50%;
+  font-size: 28rpx;
+}
+
+.number_font_2 {
+  text-align: center;
+  width: 10%;
+  font-size: 28rpx;
+}
+
+.invoice {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 15rpx auto;
+}
+
+.invoice_chose {
+  font-size: 35rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.invoice_text {
+  font-size: 30rpx;
+  opacity: 0.4;
+}
+
+.remark_cell {
+  margin: 0 auto;
+  width: 95%;
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+
+.remark_font {
+  font-size: 30rpx;
+  margin: 0 auto;
+  margin-top: 10rpx;
+  width: 90%;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+}
+
+.takeself {
+  z-index: 9;
+  width: 100%;
+  overflow: hidden;
+}
+
+.takeself_shopLocation {
+  font-size: 35rpx;
+  margin: 20rpx 0;
+  margin-left: 5%;
+}
+
+.takeself_map {
+  width: 90%;
+  margin: 20rpx 5%;
+}
+
+.takeself_cell {
+  margin: 20rpx auto;
+  width: 90%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.takeself_time_cell {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.line {
+  width: 1rpx;
+  border-right: 1rpx solid #efefef;
+  height: 80%;
+}
+
+.takeself_call_cell {
+  width: 50%;
+  height: 100%;
+  margin-left: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.takeself_font {
+  font-size: 30rpx;
+  opacity: 0.5;
+}

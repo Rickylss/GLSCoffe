@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'iconfont';  /* project id 997112 */
-  src: url('//at.alicdn.com/t/font_997112_uauo4gtvet.eot');
-  src: url('//at.alicdn.com/t/font_997112_uauo4gtvet.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_997112_uauo4gtvet.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_997112_uauo4gtvet.woff') format('woff'),
-  url('//at.alicdn.com/t/font_997112_uauo4gtvet.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_997112_uauo4gtvet.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_997112_mw1b2qzyaj.eot');
+  src: url('//at.alicdn.com/t/font_997112_mw1b2qzyaj.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_997112_mw1b2qzyaj.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_997112_mw1b2qzyaj.woff') format('woff'),
+  url('//at.alicdn.com/t/font_997112_mw1b2qzyaj.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_997112_mw1b2qzyaj.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -26,7 +26,7 @@
 
 .icon-more2:after { content: "\e61e"; font-size: 30rpx; color: rgb(183, 108, 37); font-weight: 550; margin-left: 5rpx;}
 
-.icon-add:before { content: "\e620"; }
+.icon-more3:after { content: "\e61e"; font-size: 50rpx; color: rgb(183, 108, 37); font-weight: 900;}
 
 .icon-favorite:before { content: "\e625"; }
 
@@ -47,8 +47,6 @@
 .icon-yiwanchengdingdan:before { content: "\e646"; }
 
 .icon-banshou_Line:before { content: "\e64e"; }
-
-.icon-tubiao_gengduocaidan:before { content: "\e653"; }
 
 .icon-gerenyonghutouxiang2:before { content: "\e7e5"; }
 
@@ -71,3 +69,15 @@
 .icon-chose-address:before { content: "\e61e"; font-size: 50rpx; color: rgb(183, 108, 37); font-weight: 700;}
 
 .icon-wrong:before { content: "\e61b"; }
+
+.icon-finished:after { content: "\e75c"; margin-left: 30rpx; font-weight: 600;}
+
+.icon-tubiao_gengduocaidan:after { content: "\e653"; margin-left: 30rpx; font-weight: 600;}
+
+.icon-huiyuan:before {content: "\e644"; font-size: 40rpx; color: rgb(183, 108, 37); font-weight: 900;}
+
+.icon-change:before {content: "\e723"; font-size: 50rpx; color: rgb(183, 108, 37); font-weight: 600;}
+
+.icon-add:before { content: "\e620"; font-size: 35rpx; color: rgb(183, 108, 37); font-weight: 600;}
+
+.icon-minus:before { content: "\e6a8"; font-size: 35rpx; color: rgb(183, 108, 37); font-weight: 600;}

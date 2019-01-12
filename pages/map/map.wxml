@@ -1,5 +1,0 @@
-<!--pages/map/map.wxml-->
-<map id="coffeMap" class="takeself_map" subkey="{{mapInfo.tencentMap}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{{mapInfo.scale}}" show-location="true" bindtap='bindShowFullMap'>
-  <cover-image src='../../images/return.png' hidden='{{!mapInfo.showFullMap}}' class='fix_map_return' bindtap='goBack'/>
-  <cover-image src='../../images/self-location.png' hidden='{{!mapInfo.showFullMap}}' class='fix_map_local' bindtap="selfLocationClick"/>
-</map>

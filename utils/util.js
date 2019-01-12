@@ -1,3 +1,5 @@
+var app = getApp();
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -48,6 +50,33 @@ function request(url, data={}, method="GET") {
 }
 
 /**
+ * 跳转至用户登陆
+ */
+function toUserLogin() {
+  return new Promise(function(resolve, reject){
+    wx.showModal({
+      title: '未登录',
+      content: '是否先登陆小程序',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/auth/login/login',
+          })
+          resolve();
+        } else {
+          console.log("用户拒绝登录");
+          reject();
+        }
+      },
+      fail: function (err) {
+        console.log(err);
+        reject(err);
+      }
+    })
+  });
+}
+
+/**
  * 封装获取权限
  */
 function getSetting() {
@@ -85,4 +114,5 @@ module.exports = {
   request: request,
   getSetting: getSetting,
   authorize: authorize,
+  toUserLogin: toUserLogin,
 }

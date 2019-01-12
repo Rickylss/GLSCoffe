@@ -1,0 +1,18 @@
+<!--pages/ucenter/address/address.wxml-->
+<include src="../../loading/loading.wxml"/>
+
+<view class='address_add icon iconfont icon-add' bindtap='addAddress'/>
+<view class='address_all'>
+  <block wx:for="{{addressList}}" wx:key="addressId">
+    <view class='address_cell'>
+      <view>
+        <view class="address_info_address">
+          <text class='address_default' wx:if='{{item.default}}'>默认</text>
+        {{item.address}}
+        </view>
+        <text class='address_info_cell' space='emsp'>{{item.costomerName}} {{item.gender?'先生':'女士'}}  {{item.phoneNumber}}</text>
+      </view>
+      <view class='address_update icon iconfont icon-change' data-addressid='{{item.addressId}}' bindtap='updateAddress'/>
+    </view>
+  </block>
+</view>

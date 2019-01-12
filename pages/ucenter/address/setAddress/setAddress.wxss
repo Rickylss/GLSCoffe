@@ -1,0 +1,85 @@
+/* pages/ucenter/address/setAddress/setAddress.wxss */
+@import "../../../../styles/iconfont.wxss";
+@import "../../../loading/loading.wxss";
+
+.address_minus {
+  position: fixed;
+  top: 10rpx;
+  right: 5%;
+}
+
+.setaddress {
+  margin: 60rpx auto;
+  width: 90%;
+  background-color: #ffffff;
+  border-radius: 30rpx;
+  padding: 40rpx 0;
+}
+
+.setaddress_location_cell {
+  width: 93%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setaddress_text {
+  font-size: 30rpx;
+  font-weight: 500;
+  width: 18%;
+}
+
+.setaddress_input_width {
+  width: 80%;
+}
+
+.setaddress_placeholder_input {
+  font-size: 30rpx;
+}
+
+.setaddress_input {
+  font-size: 30rpx;
+}
+
+.cutline {
+  margin: 20rpx auto;
+  width: 93%;
+  border-bottom: 2rpx solid #efefef;
+}
+
+.cutline_short {
+  margin: 30rpx 0;
+  margin-left: 20%;
+  width: 75%;
+  border-bottom: 2rpx solid #efefef;
+}
+
+.save_info{
+  font-size: 40rpx;
+  text-align: center;
+  width: 78%;
+  height: 70rpx;
+  line-height: 70rpx;
+  background-color: rgb(183, 108, 37);
+  color: #ffffff;
+  margin: 0 auto;
+  border-radius: 20rpx;
+}
+
+.setaddress_costomer_radio {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 25rpx;
+  margin-left: 20%;
+}
+
+.radio {
+  margin-right: 1%;
+  transform: scale(0.8);
+  font-size: 37rpx;
+}

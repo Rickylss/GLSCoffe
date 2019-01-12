@@ -1,0 +1,54 @@
+/* pages/ucenter/address/address.wxss */
+@import "../../../styles/iconfont.wxss";
+@import "../../loading/loading.wxss";
+
+.address_all {
+  width: 90%;
+  margin: 60rpx auto;
+  background-color: #ffffff;
+  border: 2rpx solid #ffffff;
+  border-radius: 30rpx;
+}
+
+.address_cell {
+  margin: 0 auto;
+  padding: 16rpx 0;
+  width: 85%;
+  border-bottom: 1rpx solid #efefef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.address_info_address {
+  width: 100%;
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 5rpx;
+}
+
+.address_default{
+  border-radius: 10rpx;
+  background-color: rgb(183, 108, 37);
+  padding: 5rpx 10rpx;
+  color: #ffffff;
+  font-size: 20rpx;
+  font-weight: 500;
+}
+
+.address_info_cell {
+  width: 100%;
+  font-size: 30rpx;
+  font-weight: 300;
+}
+
+.address_update {
+  line-height: 85rpx;
+}
+
+.address_add {
+  position: fixed;
+  top: 10rpx;
+  right: 5%;
+}

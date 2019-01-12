@@ -1,0 +1,11 @@
+<!--pages/loading/loading.wxml-->
+<view class="loading_box" wx:if='{{loading.loadingShow}}'>
+  <view class="loading loading_1"></view>
+  <view class="loading loading_2"></view>
+  <view class="loading loading_3"></view>
+  <view class="loading loading_4"></view>
+</view>
+
+<view class="loading_error_box" wx:if="{{loading.loadingError}}">
+  <image class="loading_offline" src='../../../images/offline.png'/>
+</view>

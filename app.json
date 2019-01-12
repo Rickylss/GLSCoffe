@@ -1,17 +1,28 @@
 {
-  "pages":[    
-    "pages/pay/pay",
-    "pages/index/index",
+  "pages":[  
 
-    "pages/list/list",
-    "pages/map/map",
-    "pages/my/my",
+    "pages/index/index", 
+
+    "pages/shopcenter/index/index",
+    "pages/shopcenter/payment/payment",
+    "pages/shopcenter/map/map",
+
     "pages/auth/accountLogin/accountLogin",
     "pages/auth/register/register",
     "pages/auth/reset/reset",
-    "pages/order/order",
+
+    "pages/ordercenter/index/index",
+    "pages/ordercenter/order/order",
+
+    "pages/ucenter/index/index",
+    "pages/ucenter/address/address",
+    "pages/ucenter/address/setAddress/setAddress",
+    "pages/ucenter/vip/vip",
+    "pages/ucenter/invoice/invoice",
+    "pages/ucenter/about/about",
+    "pages/ucenter/customer/customer",
     "pages/Ricky/Ricky",
-    "pages/about/about"
+    "pages/loading/loading"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -26,7 +37,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      "desc": "小程序需要获取您的位置信息"
     }
   }
 }

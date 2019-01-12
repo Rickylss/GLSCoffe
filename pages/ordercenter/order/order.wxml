@@ -1,0 +1,59 @@
+<!--pages/order/order.wxml-->
+<view class="is_finished icon iconfont {{finished?'icon-finished':'icon-tubiao_gengduocaidan'}}">{{finished_text}}</view>
+<!-- 有订单信息 -->
+<block wx:if="{{orderInfo.length > 0}}">
+  <view class="order_type">{{orderType}}</view>
+  <view class='container'>
+    <view class="takeaway" wx:if="{{showOrderType}}">  
+      <view class="address" >
+        <view class='address_location'>{{address.location}}</view>
+        <text class='address_text' space='emsp' >{{address.name}}  {{address.phone}}</text>
+      </view>
+      <view class='dividing_line'/>
+      <view class='order_time'>
+        <view class='send_time'>{{sendTime}}</view>
+        <view class='arrive_time'>{{arriveTime}}</view>
+      </view>
+    </view>
+    <view class="takeself" wx:elif="{{!showOrderType && !finished}}">
+      <view class='takeself_shopLocation'>{{mapInfo.shopLocation}}</view>
+      <map id="coffeMap" class="takeself_map" subkey="{{mapInfo.tencentMap}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{ {mapInfo.scale}}" show-location="true" markers="{{mapInfo.shopInfo}}"  bindtap='bindShowFullMap'/>
+      <view class="takeself_cell">
+        <view class="takeself_time_cell" bindtap='choseTime'>
+          <view class='takeself_font'>自取时间:</view>
+          <text style='color: rgb(183, 108, 37); font-size: 30rpx;' class="icon iconfont icon-more2">{{takeselfTime}}</text>
+        </view>
+        <view class='line' />
+        <view class='takeself_call_cell' bindtap='chosePhone'>
+          <view class='takeself_font'>预留电话:</view>
+          <text style='color: rgb(183, 108, 37); font-size: 30rpx;' class="icon iconfont icon-more2">{{takeselfPhone}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='cut_line'/>
+    <view class="order_info">
+      <view class="order_info_cell" wx:for="{{orderInfo}}" wx:key="name">
+        <view class='order_info_more'>
+          <text class="order_info_more_name">{{item.name}}</text>
+          <text class="order_info_more_remark">{{item.remark}}</text>
+        </view>
+        <text class='number_font_1'>￥{{item.cost}}</text>
+        <text class='number_font_2'>x{{item.amount}}</text>
+      </view>
+    </view>
+    <block wx:if="{{invoiceInfo.type}}">
+      <view class='cut_line'/>
+      <view class="invoice">
+        <view class='invoice_chose'>{{invoiceInfo.title}}</view>
+        <view class='invoice_text'>税号：{{invoiceInfo.taxNumber}}</view>
+      </view>
+    </block>
+    <view class='cut_line'/>
+    <view class='remark_cell' >
+      <text style='color: rgb(183, 108, 37); font-size: 37rpx;' >备注：</text>
+      <view class='remark_font'>{{remark}}</view>
+    </view>
+
+  </view>
+  <view style='height: 20px;background-color: #efefef; margin-top: 20rpx'/>
+</block>

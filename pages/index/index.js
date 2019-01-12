@@ -50,7 +50,7 @@ Page({
    */
   tapBuy: function(e) {
     wx.navigateTo({
-      url: '/pages/list/list',
+      url: '/pages/shopcenter/index/index',
     })
   },
 
@@ -59,7 +59,7 @@ Page({
    */
   tapOrder: function(e) {
     wx.navigateTo({
-      url: '/pages/order/order',
+      url: '/pages/ordercenter/index/index',
     })
   },
 
@@ -68,7 +68,7 @@ Page({
    */
   tapMy: function(e) {
     wx.navigateTo({
-      url: '/pages/my/my',
+      url: '/pages/ucenter/index/index',
     })
   },
 })

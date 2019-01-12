@@ -1,0 +1,77 @@
+/* pages/orders/orders.wxss */
+@import "/styles/iconfont.wxss";
+
+.no_order {
+  width: 85%;
+  margin: 10% auto;
+  border: 1rpx solid #ffffff;
+  border-radius: 30rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rpx #888888;
+}
+
+.start_order {
+  margin: 0 auto;
+  height: 70rpx;
+  width: 85%;
+  border: 1rpx solid rgb(183, 108, 37);
+  border-radius: 30rpx;
+  background-color: rgb(183, 108, 37);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders {
+  margin-top: 3%;
+  width: 100%;
+}
+.order_cell {
+  width: 80%;
+  border: 0rpx solid #efefef;
+  background-color: #ffffff;
+  border-radius: 25rpx;
+  margin: 25rpx auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.order_item {
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-bottom: 5rpx;
+}
+
+.order_time_spend {
+  width: 100%;
+  font-size: 30rpx;
+  margin: 5rpx 0;
+}
+
+.order_more {
+  align-self: flex-end;
+}
+
+.order_appraise {
+  margin-top: 5rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.order_appraise_pinjia {
+  width: 20%;
+  font-size: 30rpx;
+}
+
+.order_appraise_text {
+  width: 80%;
+  font-size: 27rpx;
+  opacity: 0.7;
+}

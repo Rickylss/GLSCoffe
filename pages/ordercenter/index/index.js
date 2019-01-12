@@ -4,25 +4,21 @@ var util = require("../../../utils/util.js");
 var api = require("../../../navigator/api.js");
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     hasOrder: true,
     orderList: [],
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+    loading: {
+      loadingShow: true,
+      loadingError: false,
+    },
   },
 
   onShow: function (options) {
     var that = this;
-    if (true) {
+    if (app.globalData.hasLogin) {
       that.getOrderList();
     } else {
       util.toUserLogin().catch((err) => {
@@ -46,11 +42,15 @@ Page({
       }, "POST").then((res) => {
         that.setData({
           orderList: res,
+          'loading.loadingShow': false,
+          'loading.loadingError': false,
         });
         console.log("获取所有订单信息成功");
       }).catch((err) => {
         that.setData({
           hasOrder: false,
+          'loading.loadingShow': false,
+          'loading.loadingError': true,
         });
         console.log(err);
       });
@@ -62,7 +62,7 @@ Page({
   tapOrder: function () {
     if (!this.data.hasOrder) {
       wx.navigateTo({
-        url: '/pages/list/list',
+        url: '../../shopcenter/index/index',
       });
     }
   },

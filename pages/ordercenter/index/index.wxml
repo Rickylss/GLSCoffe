@@ -1,4 +1,5 @@
 <!--pages/orders/orders.wxml-->
+<include src="../../loading/loading.wxml"/>
 <!-- 无订单信息 -->
 <block wx:if="{{!hasOrder}}">
   <view class='no_order'>
@@ -14,12 +15,14 @@
   <view class="orders">
     <block  wx:for="{{orderList}}" wx:key="orderId">
       <view class="order_cell" data-orderid='{{item.orderId}}' bindtap="gotoOrder">
-        <view class='order_more icon iconfont icon-more3'></view>
-        <text class='order_item'>{{item.items}}</text>
+        <view class='order_tag'>
+          <text class='order_item'>{{item.items}}</text>
+          <view class='order_more icon iconfont icon-more3'></view>
+        </view>
         <text class='order_time_spend' space='ensp' >下单时间：{{item.orderTime}}</text>
-        <text class='order_time_spend' space='ensp'>总价：￥{{item.spend}}</text>
+        <text class='order_time_spend' space='ensp'>总价：    ￥{{item.spend}}</text>
         <view class='order_appraise'>
-          <view class='order_appraise_pinjia'>评价：</view>
+          <text class='order_appraise_pinjia' space='ensp'>评价:</text>
           <view class='order_appraise_text' >{{item.appraise}}</view>
         </view>
       </view>

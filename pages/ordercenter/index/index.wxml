@@ -27,6 +27,9 @@
         </view>
       </view>
     </block>
+    <view class="loading_more" hidden='{{!loadingMore}}'>
+      <view class="loading_fade_circle"></view>
+    </view>
   </view>
 </block>
 

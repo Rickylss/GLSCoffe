@@ -14,6 +14,8 @@ Page({
       loadingShow: true,
       loadingError: false,
     },
+    loadingMore: false,
+    pageIndex: 5,
   },
 
   onShow: function (options) {
@@ -30,13 +32,23 @@ Page({
     }
   },
 
+  onReachBottom: function() {
+    var that = this;
+    that.setData({
+      loadingMore: true,
+      pageIndex: that.data.pageIndex + 5,
+    });
+    this.getOrderListMore();
+  },
+
   /**
-   * 获取所有订单信息
+   * 获取订单信息
    */
   getOrderList: function () {
     var that = this;
     util.request(api.GetOrderList,
       {
+        pageIndex: that.data.pageIndex,
         userId: wx.getStorageSync("userInfo").userId,
         token: wx.getStorageSync("token"),
       }, "POST").then((res) => {
@@ -51,6 +63,32 @@ Page({
           hasOrder: false,
           'loading.loadingShow': false,
           'loading.loadingError': true,
+        });
+        console.log(err);
+      });
+  },
+
+  /**
+ * 获取更多订单信息
+ */
+  getOrderListMore: function () {
+    var that = this;
+    util.request(api.GetOrderList2,
+      {
+        pageIndex: that.data.pageIndex,
+        userId: wx.getStorageSync("userInfo").userId,
+        token: wx.getStorageSync("token"),
+      }, "POST").then((res) => {
+        if (res){
+          that.setData({
+            orderList: this.data.orderList.concat(res),
+            loadingMore: false,
+          });
+        }
+        console.log("获取所有订单信息成功");
+      }).catch((err) => {
+        that.setData({
+          loadingMore: false,
         });
         console.log(err);
       });

@@ -87,3 +87,44 @@
   height: 17%;
   width: 30%;
 }
+
+.loading_fade_circle {
+  margin: 0 auto;
+  width: 30rpx;
+  height: 30rpx;
+  background: rgb(183, 108, 37);
+  border-radius: 50%;
+  -webkit-animation: fading_circle 1s ease-out infinite alternate;
+  animation: fading_circle 1s ease-out infinite alternate;
+}
+
+@-webkit-keyframes fading_circle {
+  0% {
+    transform: scale(1.5);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+}
+
+@keyframes fading_circle {
+  0% {
+    transform: scale(1.5);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+}
+
+.loading_more {
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+  bottom: 10rpx;
+}

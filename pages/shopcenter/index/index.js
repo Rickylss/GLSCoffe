@@ -8,22 +8,26 @@ Page({
    * 页面的初始数据
    */
   data: {
+    banner: {
+      showBanner: true,
+      url: "../../../images/2-1.jpg",
+    },
     listData: [],
     cartList: [
-      { name: "world", price: 7 },
-      { name: "hello", price: 16 },
-
-      { name: "heaadfasfllo", price: 32 }
+      { id: 1, name: "world", tag:"加热加糖", price: 7, num: 1, },
+      { id: 2, name: "hello", tag: "加热",price: 16, num: 1,},
+      { id: 3, name: "world", tag: "加糖",price: 7, num: 1,},
+      { id: 4, name: "hello", tag: "加热加糖",price: 16, num: 1,},
+      { id: 5, name: "world", tag: "加热",price: 7, num: 1,},
+      { id: 6, name: "hello", tag: "加糖",price: 16, num: 1,},
+      { id: 7, name: "heaadfasfllo", tag: "加热加糖",price: 32, num: 1, }
     ],
     hasLoading: false,
     showCart: false,
-    scrollHidBanner: {
-      showBanner: true,
-    },
     count: 12,
     okToSend: 10,
     shortCut: "下单立减31元，再买12可减41元",
-    winHeight: 0,
+    listHeight: 0,
   },
 
   /**
@@ -31,9 +35,13 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    this.setData({
-      winHeight: wx.getSystemInfoSync().windowHeight,
+
+    this.caclHeight().then((res)=>{
+      this.setData({
+        listHeight: wx.getSystemInfoSync().windowHeight - res,
+      });
     });
+
     wx.showLoading({
       title: '努力加载中',
     });
@@ -51,6 +59,21 @@ Page({
           hasLoading: false
         });
       });
+  },
+
+  /**
+   * 计算剩余可用高度
+   */
+  caclHeight: function() {
+    return new Promise(function(resolve, reject){
+      var height = 0;
+      wx.createSelectorQuery().selectAll('.height').boundingClientRect(function (rects) {
+        rects.forEach(function (rect) {
+          height += rect.height;
+        })
+        resolve(height)
+      }).exec();
+    });
   },
 
   /**
@@ -88,7 +111,7 @@ Page({
       cartList: [],
       count: 0,
       showCart: false,
-    })
+    });
   },
 
   /**

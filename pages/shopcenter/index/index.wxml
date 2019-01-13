@@ -1,24 +1,29 @@
-<!--pages/list/list.wxml-->
+<!--pages/shopcenter/index/index.wxml-->
 
-<view class="banner" hidden='{{!scrollHidBanner.showBanner}}'>
-  <image class='banner_img' src='../../../images/2-1.jpg'></image>
+<view class="banner height" hidden='{{!banner.showBanner}}'>
+  <image class='banner_img' src='{{banner.url}}'></image>
 </view>
-<view class="list {{scrollHidBanner.showBanner?'':'hidBanner'}}" style='height: {{winHeight}}px;'>
+<view class="list" style='height: {{listHeight}}px;'>
   <!-- 左侧菜单 -->
-  <scroll-view class="list_left_menu" scroll-y="true" >
-    <view wx:for="{{listData}}" wx:key="unique" class="{{index==activeIndex?'list-left-menu-box-selected':'list-left-menu-box-unselect'}}"  data-index="{{index}}" bindtap='selectMenu'>
+  <scroll-view class="list_left_menu" scroll-y="true">
+    <view wx:for="{{listData}}" wx:key="unique" data-index="{{index}}" bindtap='selectMenu'>
       <view class='list_menu_cell'>
-        <view class="list_menu_name">{{item.name}}</view>
+
+        <view class="list_menu_name">
+          <view style='  text-align: center; margin: 0 auto; font-size: 30rpx;' >{{item.name}}</view>
+        </view>
       </view>
     </view>
   </scroll-view>
   <!-- 右侧菜单 -->
   <scroll-view class="list_right_menu" scroll-y="true" bindscroll="scrollRightMenu" scroll-into-view="{{toView}}">
     <view class="content" id="a{{index}}" wx:for="{{listData}}" wx:key="unique">
-      <view class='list_tab'>{{item.name}}</view>
+      <view class='list_tab'>
+        <view class='list_tab_text'>{{item.name}}</view>
+      </view>
       <view class='content-list' wx:for="{{item.foods}}" wx:key="unique" wx:for-item="items" wx:for-index="indexs">
         <view class='list-image-box'>
-          <image class="list-image" mode="widthFix" src='{{items.image_url}}'></image>
+          <image class="list-image" src='{{items.image_url}}'></image>
         </view>
         <view class='issue-name'>
           <view>{{items.name}}</view>
@@ -34,26 +39,13 @@
 
 
 <!-- 购物车 -->
-<view class='cart'>
-  <view class="cart_cell" bindtap='showCartList'>
-    <view class="icon iconfont icon-coffe {{count!=0?'act_color':''}}" style='margin-left: 5%; width: 25%;'/>
-    <view class='cart_font' wx:if="{{count!=0}}">￥{{count}}.00</view>
-    <view class='cart_font' wx:else>购物车是空的</view>
-  </view>
-  <view class="cart_buy {{count >= okToSend?'act_color_background':''}}">
-    <text class="cart_buy_font" bindtap='pay' wx:if="{{count >= okToSend}}">去结算</text>
-    <text class="cart_buy_font" wx:else>￥{{okToSend}}起送</text>
-  </view>
-</view>
-
-<!-- 显示购物车列表 -->
-<mask hidden="{{!showCart}}" scroll-y="true" class='cartList_float_lock'/>
-
-<view class="cartList_float {{showCart?'cartList_showup':'cartList_hid'}}">
+<mask hidden="{{!showCart}}" class='mask'/>
+<view class='foot height'>
   <view class="shortCut_cell {{count==0?'shortCut_hid':''}}">
     <view class='shortCut_text'>{{shortCut}}</view>
   </view>
-  <view class='cartList_float_cell_all'>
+
+  <view class='cartList_float_cell_all' hidden="{{!showCart}}">
     <view class='cartList_float_bar'>
       <view class="cartList_float_bar_text_line cartList_float_bar_text">已选商品</view>
       <view class="cartList_float_bar_clear" bindtap='clearCartList'>
@@ -61,11 +53,30 @@
         <view class='cartList_float_bar_text'>清空购物车</view>
       </view>
     </view>
-    <scroll-view class="cartList_float_cells_scroll {{cartList.length>5?'cart-scroll-list':''}}" scroll-y="true" scroll-top="0" >
-      <view class='cartList_float_cells' wx:for="{{cartList}}" wx:key="">
-        <view class='cartList_float_cell'>{{item.name}} : {{item.price}}</view>
+    <scroll-view class="cartList_float_cells_scroll {{cartList.length>5?'cart-scroll-height':''}}" scroll-y="true" scroll-top="0" >
+      <view class='cartList_float_cells' wx:for="{{cartList}}" wx:key="id">
+        <view class='cartList_float_text'>
+          <view class='cartList_float_text_name'>{{item.name}}</view>
+          <view class='cartList_float_text_tag'>{{item.tag}}</view>
+        </view>
+        <view class='cartList_float_price'>￥{{item.price}}</view>
+        <view class='icon iconfont icon-minus2' data-id='{{item.id}}' bindtap='minusNum'/>
+        <view class='cartList_float_num'>{{item.num}}</view>
+        <view class='icon iconfont icon-add2' data-id='{{item.id}}' bindtap='addNum'/>
       </view>
     </scroll-view>  
+  </view>
+
+  <view class='cart'>
+    <view class="cart_cell" bindtap='showCartList'>
+      <view class="icon iconfont icon-coffe {{count!=0?'act_color':''}}" style='margin-left: 5%; width: 25%;'/>
+      <view class='cart_font' wx:if="{{count!=0}}">￥{{count}}.00</view>
+      <view class='cart_font' wx:else>购物车是空的</view>
+    </view>
+    <view class="cart_buy {{count >= okToSend?'act_color_background':''}}">
+      <text class="cart_buy_font" bindtap='pay' wx:if="{{count >= okToSend}}">去结算</text>
+      <text class="cart_buy_font" wx:else>￥{{okToSend}}起送</text>
+    </view>
   </view>
 </view>
 

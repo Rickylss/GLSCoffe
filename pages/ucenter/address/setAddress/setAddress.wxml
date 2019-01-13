@@ -11,7 +11,7 @@
   <view class='setaddress_location_cell'>
     <text class='setaddress_text'>地址:</text>
     <view class='setaddress_input_width setaddress_input' >{{addressInfo.region[0]}}{{addressInfo.region[1]}}{{addressInfo.region[2]}}</view>
-    <picker mode="region" bindchange='bindRegionChange' value='{{addressInfo.region}}'>
+    <picker style='color: red;' mode="region" bindchange='bindRegionChange' value='{{addressInfo.region}}'>
         <view class="icon iconfont icon-more" />
     </picker>
 

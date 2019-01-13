@@ -39,7 +39,7 @@ Page({
       longitude: '',
       subKey: constant.tencentAk,
       mapID: constant.mapID,
-      scale: constant.scale,
+      scale: constant.defaultScale,
       shopInfo: [{
         iconPath: '../../../images/dog-select.png',
         id: 0,

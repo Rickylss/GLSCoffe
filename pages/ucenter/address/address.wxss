@@ -2,6 +2,16 @@
 @import "../../../styles/iconfont.wxss";
 @import "../../loading/loading.wxss";
 
+.address_chose {
+  font-size: 35rpx;
+  font-weight: 550;
+  text-align: center;
+  color: rgb(183, 108, 37);
+  position: fixed;
+  top: 0;
+  left: 5%;
+}
+
 .address_all {
   width: 90%;
   margin: 60rpx auto;

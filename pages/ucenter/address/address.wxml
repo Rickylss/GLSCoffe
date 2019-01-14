@@ -1,11 +1,13 @@
 <!--pages/ucenter/address/address.wxml-->
 <include src="../../loading/loading.wxml"/>
 
+<view class='address_chose' wx:if="{{choseFlag}}">请选择想要使用的地址</view>
 <view class='address_add icon iconfont icon-add' bindtap='addAddress'/>
-<view class='address_all'>
+<view style='font-size：35rpx; font-weight: 600; text-align: center; color: rgb(183, 108, 37);' wx:if="{{addressList.length==0}}">点击加号添加地址<icon class="icon iconfont icon-tianjia"/></view>
+<view class='address_all' wx:else>
   <block wx:for="{{addressList}}" wx:key="addressId">
     <view class='address_cell'>
-      <view>
+      <view  data-index="{{index}}" bindtap="choseAddress">
         <view class="address_info_address">
           <text class='address_default' wx:if='{{item.default}}'>默认</text>
         {{item.address}}

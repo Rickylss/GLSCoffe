@@ -14,6 +14,15 @@ Page({
       loadingShow: true,
       loadingError: false,
     },
+    choseFlag: false,
+  },
+
+  onLoad: function(option) {
+    if (option.mode =="choseAddress"){
+      this.setData({
+        choseFlag: true,
+      });
+    }
   },
 
   /**
@@ -70,6 +79,19 @@ Page({
     if(id) {
       wx.navigateTo({
         url: '/pages/ucenter/address/setAddress/setAddress?type='+type+'&id='+id,
+      })
+    }
+  },
+
+  /**
+   * 选择地址
+   */
+  choseAddress: function(e) {
+    if(this.data.choseFlag) {
+      var defaultAddress = this.data.addressList[e.currentTarget.dataset.index];
+      wx.setStorageSync('defaultAddress', defaultAddress);
+      wx.navigateBack({
+        dlta: 1,
       })
     }
   },

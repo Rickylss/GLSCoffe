@@ -1,6 +1,8 @@
 // pages/pay/pay.js
+var api = require('../../../navigator/api.js')
 var constant = require("../../../utils/constant.js");
 var util = require("../../../utils/util.js")
+var app = getApp();
 var QQMapWX = require('../../../lib/qqmap-wx-jssdk.js');
 var qqmapsdk;
 var mapID = "coffeMap";
@@ -14,21 +16,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    winHeight: 0,
+    chosedAddress: {
+      "default": false,
+      "addressId": 1,
+      "costomerName": "肖海飚",
+      "gender": 1,
+      "phoneNumber": "2325678",
+      "address": "鄱湖云科技有限公司",
+    },
+    loading: {
+      loadingShow: false,
+      loadingError: false,
+    },
     switchShowUp: true,
-    addressInfo: {},
     sendTime: "立即送出",
     arriveTime: "已送达",
     orderInfo: [
-      { name: "coffee", cost: "9.00", amount: "1", remark: "少糖+加冰" },
-      { name: "boo", cost: "15.00", amount: "1", remark: "少糖" },
-      { name: "jiuce", cost: "15.00", amount: "1", remark: "少糖" },
-      { name: "jiuce", cost: "34.00", amount: "34", remark: "少糖+加冰" },
-      { name: "jiuce", cost: "20.00", amount: "4", remark: "少糖" },
-      { name: "kill", cost: "3.00", amount: "1", remark: "少糖" },
-      { name: "jiuce", cost: "76.00", amount: "4", remark: "少糖" },
-      { name: "laaa", cost: "34.00", amount: "4", remark: "少糖" }
+      { id: 1, name: "world", tag: "加热+加糖", price: 7, num: 1, },
+      { id: 2, name: "hello", tag: "加热", price: 16, num: 1, },
+      { id: 3, name: "world", tag: "加糖", price: 7, num: 1, },
+      { id: 4, name: "hello", tag: "加热+加糖", price: 16, num: 1, },
+      { id: 5, name: "world", tag: "加热", price: 7, num: 1, },
+      { id: 6, name: "hello", tag: "加糖", price: 16, num: 1, },
+      { id: 7, name: "heaadfasfllo", tag: "加热加糖", price: 32, num: 1, }
     ],
+    cost: 12,
     remarks: '',
     remarkPlaceholder: "饮品中规格可参阅订单中的显示，若有其他要求，请说明。",
     takeselfTime: '12:00',
@@ -65,10 +77,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      winHeight: wx.getSystemInfoSync().windowHeight * 0.08,
-    });
     qqmapsdk = new QQMapWX({ key: constant.tencentAk });
+    if (app.globalData.hasLogin) {
+      
+    } else {
+      util.toUserLogin().catch((err) => {
+        console.log(err);
+        wx.navigateBack({
+          dlta: 1,
+        })
+      });
+    }
+  },
+
+  onShow: function() {
+    this.setData({
+      chosedAddress: wx.getStorageSync('defaultAddress'),
+    });
+    console.log(this.data.choseAddress);
   },
 
   /**
@@ -255,7 +281,9 @@ Page({
    * 选择收货地址
    */
   choseAddress: function () {
-
+    wx.navigateTo({
+      url: '../../ucenter/address/address?mode=choseAddress',
+    })
   },
   /**
    * 绑定备注输入

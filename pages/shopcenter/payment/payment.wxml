@@ -1,4 +1,6 @@
 <!--pages/pay/pay.wxml-->
+<include src="../../loading/loading.wxml"/>
+
 <view class="tag">
   <view class="tag_cell {{switchShowUp?'upToFront':''}}" bindtap='bindTakeaway'>
     <text class='tag_font' >外卖配送</text>
@@ -10,8 +12,12 @@
 
 <view class='container'>
   <view class="takeaway" hidden="{{!switchShowUp}}">  
-    <view class="address" >
-      <view class='address_chose' bindtap='choseAddress'>选择收货地址</view>
+    <view class="address" bindtap='choseAddress'>
+      <view class="chosed_address" wx:if="{{chosedAddress.address}}">
+        <view style='font-size: 35rpx; font-weight: 550; margin-top: 15rpx;'>{{chosedAddress.address}}</view>
+        <text style='font-size: 30rpx; margin-top: 15rpx; opacity: 0.7;' space='emsp'>{{chosedAddress.costomerName}} {{chosedAddress.gender?'先生':'女士'}}  {{chosedAddress.phoneNumber}}</text>
+      </view>
+      <view class='address_chose' wx:else>选择收货地址</view>
       <view class='icon iconfont icon-chose-address'/>
     </view>
     <view class='dividing_line'/>
@@ -40,10 +46,10 @@
     <view class="order_info_cell" wx:for="{{orderInfo}}" wx:key="name">
       <view class='order_info_more'>
         <text class="order_info_more_name">{{item.name}}</text>
-        <text class="order_info_more_remark">{{item.remark}}</text>
+        <text class="order_info_more_remark">{{item.tag}}</text>
       </view>
-      <text class='number_font_1'>￥{{item.cost}}</text>
-      <text class='number_font_2'>x{{item.amount}}</text>
+      <text class='number_font_1'>￥{{item.price}}</text>
+      <text class='number_font_2'>x{{item.num}}</text>
     </view>
   </view>
   <view class='cut_line'/>
@@ -53,15 +59,15 @@
   </view>
   <view class='cut_line'/>
   <view class='remark_cell'>
-    <textarea class="remarks" value="{{remarks}}" maxlength="30" bindinput='bindRemarksInput' auto-height="true" placeholder="{{remarkPlaceholder}}"/>
+    <textarea class="remarks" value="{{remarks}}" maxlength="30" bindinput='bindRemarksInput' auto-height="true" placeholder="{{remarkPlaceholder}}" placeholder-class='place_holder' />
     <view class="remarks_count">{{remarks.length}}/30字</view>
   </view>
 </view>
-<view style='height: {{winHeight}}px;background-color: #efefef; margin-top: 20rpx'/>
+<view style='height: 120rpx;background-color: #efefef; margin-top: 20rpx'/>
 
 
 <view class='cart'>
-  <view class='cart_text'>合计 ￥{{}}</view>
+  <view class='cart_text'>合计 ￥{{cost}}</view>
   <view class="cart_btn" bindtap='pay'>
     <view class='cart_btn_font' >确认支付</view>
   </view>

@@ -81,7 +81,7 @@
 
 .content-list {
   margin: 18rpx auto;
-  width:  90%;
+  width:  94%;
   height: 170rpx;
   background-color: #ffffff;
   border: 0rpx solid #efefef;
@@ -90,18 +90,18 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  box-shadow: 0 0 3rpx #888888;
+  box-shadow: 0 0 2rpx #888888;
 }
 
 .list-image-box {
-  width: 150rpx;
+  width: 170rpx;
   height: 170rpx;
   border-top-left-radius: 20rpx;
   border-bottom-left-radius: 20rpx;
 }
 
 .list-image {
-  width: 150rpx;
+  width: 170rpx;
   height: 170rpx;
   border-top-left-radius: 20rpx;
   border-bottom-left-radius: 20rpx;
@@ -213,6 +213,7 @@
   overflow: hidden;
   z-index: 9;
   color: #fff;
+  transition: all 1s ease;
 }
 
 .cartList_float_cell_all {

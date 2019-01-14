@@ -28,7 +28,7 @@
         <view class='issue-name'>
           <view style='font-size: 35rpx;' >{{items.name}}</view>
           <view class='issue-cell'>
-            <view style='font-size: 30rpx;margin-top:20rpx;color:#F05A86'>¥ {{items.specfoods[0].price}}.00</view>
+            <view style='font-size: 30rpx;margin-top:20rpx;color:#F05A86'>¥{{items.specfoods[0].price}}</view>
             <view style='margin-top:20rpx;'>
                 <icon class='icon iconfont icon-minus2' data-id='{{item.id}}' bindtap='minusNum' hidden='{{num<=0}}'/>
                 <text style='font-size: 30rpx' hidden='{{num<=0}}'>{{num}}</text>
@@ -42,13 +42,13 @@
 </view>
 
 <!-- 购物车 -->
-<mask hidden="{{!showCart}}" class='mask'/>
+<view hidden="{{!cart.showCart}}" class='mask' catchtouchmove='move' />
 <view class='foot height'>
-  <view class="shortCut_cell {{count==0?'shortCut_hid':''}}">
-    <view class='shortCut_text'>{{shortCut}}</view>
+  <view class="shortCut_cell {{cart.cost==0?'shortCut_hid':''}}">
+    <view class='shortCut_text'>{{cart.shortCutInfo}}</view>
   </view>
 
-  <view class='cartList_float_cell_all' hidden="{{!showCart}}">
+  <view class='cartList_float_cell_all' hidden="{{!cart.showCart}}">
     <view class='cartList_float_bar'>
       <view class="cartList_float_bar_text_line cartList_float_bar_text">已选商品</view>
       <view class="cartList_float_bar_clear" bindtap='clearCartList'>
@@ -56,8 +56,8 @@
         <view class='cartList_float_bar_text'>清空购物车</view>
       </view>
     </view>
-    <scroll-view class="cartList_float_cells_scroll {{cartList.length>5?'cart-scroll-height':''}}" scroll-y="true" scroll-top="0" >
-      <view class='cartList_float_cells' wx:for="{{cartList}}" wx:key="id">
+    <scroll-view class="cartList_float_cells_scroll {{cart.cartList.length>5?'cart-scroll-height':''}}" scroll-y="true" scroll-top="0" >
+      <view class='cartList_float_cells' wx:for="{{cart.cartList}}" wx:key="id">
         <view class='cartList_float_text'>
           <view class='cartList_float_text_name'>{{item.name}}</view>
           <view class='cartList_float_text_tag'>{{item.tag}}</view>
@@ -72,13 +72,13 @@
 
   <view class='cart'>
     <view class="cart_cell" bindtap='showCartList'>
-      <view class="icon iconfont icon-coffe {{count!=0?'act_color':''}}" style='margin-left: 5%; width: 25%;'/>
-      <view class='cart_font' wx:if="{{count!=0}}">￥{{count}}.00</view>
+      <view class="icon iconfont icon-coffe {{cart.cost!=0?'act_color':''}}" style='margin-left: 5%; width: 25%;'/>
+      <view class='cart_font' wx:if="{{cart.cost!=0}}">￥{{cart.cost}}</view>
       <view class='cart_font' wx:else>购物车是空的</view>
     </view>
-    <view class="cart_buy {{count >= okToSend?'act_color_background':''}}">
-      <text class="cart_buy_font" bindtap='pay' wx:if="{{count >= okToSend}}">去结算</text>
-      <text class="cart_buy_font" wx:else>￥{{okToSend}}起送</text>
+    <view class="cart_buy {{cart.cost >= cart.okToSend?'act_color_background':''}}">
+      <text class="cart_buy_font" bindtap='pay' wx:if="{{cart.cost >= cart.okToSend}}">去结算</text>
+      <text class="cart_buy_font" wx:else>￥{{cart.okToSend}}起送</text>
     </view>
   </view>
 </view>

@@ -12,29 +12,33 @@ Page({
       loadingShow: true,
       loadingError: false,
     },
-    num: 0,
     banner: {
       showBanner: true,
       url: "../../../images/2-1.jpg",
     },
     listData: [],
-    cartList: [
-      { id: 1, name: "world", tag:"加热加糖", price: 7, num: 1, },
-      { id: 2, name: "hello", tag: "加热",price: 16, num: 1,},
-      { id: 3, name: "world", tag: "加糖",price: 7, num: 1,},
-      { id: 4, name: "hello", tag: "加热加糖",price: 16, num: 1,},
-      { id: 5, name: "world", tag: "加热",price: 7, num: 1,},
-      { id: 6, name: "hello", tag: "加糖",price: 16, num: 1,},
-      { id: 7, name: "heaadfasfllo", tag: "加热加糖",price: 32, num: 1, }
-    ],
-    showCart: false,
-    count: 12,
-    okToSend: 10,
-    shortCut: "下单立减31元，再买12可减41元",
+    cart: {
+      cartList: [
+        { id: 1, name: "world", tag: "加热加糖", price: 7, num: 1, },
+        { id: 2, name: "hello", tag: "加热", price: 16, num: 1, },
+        { id: 3, name: "world", tag: "加糖", price: 7, num: 1, },
+        { id: 4, name: "hello", tag: "加热加糖", price: 16, num: 1, },
+        { id: 5, name: "world", tag: "加热", price: 7, num: 1, },
+        { id: 6, name: "hello", tag: "加糖", price: 16, num: 1, },
+        { id: 7, name: "heaadfasfllo", tag: "加热加糖", price: 32, num: 1, }
+      ],
+      showCart: false,
+      cost: 12.0,
+      okToSend: 10,
+      shortCutInfo: "下单立减31元，再买12可减41元",
+    },
     listHeight: 0,
+
+    num: 0,
+
     itemSpace: [],
     scrollTop: 100,
-    activeIndex: 1,
+    activeIndex: 0,
     toView: 'a0',
   },
 
@@ -43,12 +47,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
-    this.caclHeight('.height').then((res)=>{
-      this.setData({
-        listHeight: wx.getSystemInfoSync().windowHeight - res[0] -res[1],
-      });
-    });
+    this.setHeight();
 
     util.request(api.GetList,
       {}, "GET").then((res) => {
@@ -76,6 +75,17 @@ Page({
           'loading.loadingError': true,
         });
       });
+  },
+
+  /**
+   * 设置高度
+   */
+  setHeight: function() {
+    this.caclHeight('.height').then((res) => {
+      this.setData({
+        listHeight: wx.getSystemInfoSync().windowHeight - res[0] - res[1],
+      });
+    });
   },
 
   /**
@@ -111,12 +121,14 @@ Page({
 
     if (e.detail.scrollTop > 300) {
       this.setData({
-        'scrollHidBanner.showBanner': false
+        'banner.showBanner': false
       })
+      this.setHeight();
     } else {
       this.setData({
-        'scrollHidBanner.showBanner': true
+        'banner.showBanner': true
       })
+      this.setHeight();
     }
   },
 
@@ -138,9 +150,9 @@ Page({
    * 点击购物车
    */
   showCartList: function () {
-    if (this.data.cartList.length != 0) {
+    if (this.data.cart.cartList.length != 0) {
       this.setData({
-        showCart: !this.data.showCart
+        'cart.showCart': !this.data.cart.showCart,
       });
     }
   },
@@ -161,10 +173,15 @@ Page({
    * 点击付款
    */
   pay: function () {
-    if (this.data.cartList.length != 0) {
+    if (this.data.cart.cartList.length != 0) {
       wx.navigateTo({
         url: '/pages/shopcenter/payment/payment',
       })
     }
   },
+
+  /**
+   * scroll-view 滚动层穿透问题
+   */
+  move: function(){},
 })

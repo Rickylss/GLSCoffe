@@ -8,6 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loading: {
+      loadingShow: true,
+      loadingError: false,
+    },
+    num: 0,
     banner: {
       showBanner: true,
       url: "../../../images/2-1.jpg",
@@ -22,12 +27,15 @@ Page({
       { id: 6, name: "hello", tag: "加糖",price: 16, num: 1,},
       { id: 7, name: "heaadfasfllo", tag: "加热加糖",price: 32, num: 1, }
     ],
-    hasLoading: false,
     showCart: false,
     count: 12,
     okToSend: 10,
     shortCut: "下单立减31元，再买12可减41元",
     listHeight: 0,
+    itemSpace: [],
+    scrollTop: 100,
+    activeIndex: 1,
+    toView: 'a0',
   },
 
   /**
@@ -36,40 +44,49 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    this.caclHeight().then((res)=>{
+    this.caclHeight('.height').then((res)=>{
       this.setData({
-        listHeight: wx.getSystemInfoSync().windowHeight - res,
+        listHeight: wx.getSystemInfoSync().windowHeight - res[0] -res[1],
       });
     });
 
-    wx.showLoading({
-      title: '努力加载中',
-    });
     util.request(api.GetList,
       {}, "GET").then((res) => {
         console.log(res)
         wx.hideLoading();
         this.setData({
           listData: res,
-          hasLoading: true
+          'loading.loadingShow': false,
+          'loading.loadingError': false,
+        });
+        that.caclHeight('.listCellHeight').then((res)=>{
+          var total = 0;
+          var item = [];
+          res.forEach(function(e){
+            item.push(total += e);
+          });
+          that.setData({
+            itemSpace: item,
+          });
         });
       }).catch((err) => {
         console.log('load failed');
         this.setData({
-          hasLoading: false
+          'loading.loadingShow': false,
+          'loading.loadingError': true,
         });
       });
   },
 
   /**
-   * 计算剩余可用高度
+   * 计算高度
    */
-  caclHeight: function() {
+  caclHeight: function(clzz) {
     return new Promise(function(resolve, reject){
-      var height = 0;
-      wx.createSelectorQuery().selectAll('.height').boundingClientRect(function (rects) {
+      var height = [];
+      wx.createSelectorQuery().selectAll(clzz).boundingClientRect(function (rects) {
         rects.forEach(function (rect) {
-          height += rect.height;
+          height.push(rect.height);
         })
         resolve(height)
       }).exec();
@@ -80,6 +97,18 @@ Page({
    * 滑动右侧list
    */
   scrollRightMenu: function (e) {
+    var itemSpace = this.data.itemSpace;
+    var scrollTop = e.detail.scrollTop;
+    var count = 0
+    for(count; itemSpace.length > count; count++){
+      if (scrollTop < itemSpace[count]){
+        this.setData({
+          activeIndex: count,
+        });
+        break;
+      }
+    }
+
     if (e.detail.scrollTop > 300) {
       this.setData({
         'scrollHidBanner.showBanner': false
@@ -89,6 +118,20 @@ Page({
         'scrollHidBanner.showBanner': true
       })
     }
+  },
+
+  /**
+   * 选择左边菜单栏
+   */
+  selectMenu: function(e) {
+    var index = e.currentTarget.dataset.index;
+    if(index>-1){
+      this.setData({
+        activeIndex: index,
+        toView: 'a'+index,
+      });
+    }
+    console.log(e.currentTarget.dataset.index)
   },
 
   /**

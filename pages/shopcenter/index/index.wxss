@@ -1,5 +1,6 @@
 /* pages/list/list.wxss */
 @import "/styles/iconfont.wxss";
+@import "../../loading/loading.wxss";
 
 .banner {
   margin: 0 auto;
@@ -31,13 +32,22 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  background-color: #ffffff;
+}
+
+.list-left-menu-box-selected{
+  color: #FF9C35;
+  border-left:3px solid #FF9C35;
+  background-color:#efefef;
 }
 
 .list_menu_cell {
-  background-color: #ffffff;
   width: 100%;
+  height: 150rpx;
   border-top: 1rpx solid #efefef;
   border-top-right-radius: 20rpx;
+  display: flex;
+  justify-content: center;
 }
 
 .list_menu_name {
@@ -51,10 +61,6 @@
   width: 82%;
   height: 100%;
   background-color: #efefef;
-}
-
-.content {
-
 }
 
 .list_tab {
@@ -102,9 +108,21 @@
 }
 
 .issue-name {
-
+  width: calc(100% - 150rpx);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start
 }
 
+.issue-cell {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .foot {
   width: 100%;

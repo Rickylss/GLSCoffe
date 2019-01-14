@@ -1,4 +1,5 @@
 <!--pages/shopcenter/index/index.wxml-->
+<include src="../../loading/loading.wxml"/>
 
 <view class="banner height" hidden='{{!banner.showBanner}}'>
   <image class='banner_img' src='{{banner.url}}'></image>
@@ -7,17 +8,16 @@
   <!-- 左侧菜单 -->
   <scroll-view class="list_left_menu" scroll-y="true">
     <view wx:for="{{listData}}" wx:key="unique" data-index="{{index}}" bindtap='selectMenu'>
-      <view class='list_menu_cell'>
-
+      <view class="list_menu_cell {{index==activeIndex?'list-left-menu-box-selected':''}}">
         <view class="list_menu_name">
-          <view style='  text-align: center; margin: 0 auto; font-size: 30rpx;' >{{item.name}}</view>
+          <view style='text-align: center; margin: 0 auto; font-size: 30rpx;' >{{item.name}}</view>
         </view>
       </view>
     </view>
   </scroll-view>
   <!-- 右侧菜单 -->
-  <scroll-view class="list_right_menu" scroll-y="true" bindscroll="scrollRightMenu" scroll-into-view="{{toView}}">
-    <view class="content" id="a{{index}}" wx:for="{{listData}}" wx:key="unique">
+  <scroll-view class="list_right_menu" scroll-y="true" bindscroll="scrollRightMenu"  scroll-into-view="{{toView}}" scroll-with-animation="true">
+    <view class="listCellHeight" id="a{{index}}" wx:for="{{listData}}" wx:key="unique">
       <view class='list_tab'>
         <view class='list_tab_text'>{{item.name}}</view>
       </view>
@@ -26,17 +26,20 @@
           <image class="list-image" src='{{items.image_url}}'></image>
         </view>
         <view class='issue-name'>
-          <view>{{items.name}}</view>
-          <view style='margin-top:20rpx;color:#F05A86'>
-            ¥ {{items.specfoods[0].price}}.00
-            <i class="iconfont icon-jiahao2fill plus-icon" data-type="{{index}}" data-index="{{indexs}}" bindtap="selectInfo"></i>
+          <view style='font-size: 35rpx;' >{{items.name}}</view>
+          <view class='issue-cell'>
+            <view style='font-size: 30rpx;margin-top:20rpx;color:#F05A86'>¥ {{items.specfoods[0].price}}.00</view>
+            <view style='margin-top:20rpx;'>
+                <icon class='icon iconfont icon-minus2' data-id='{{item.id}}' bindtap='minusNum' hidden='{{num<=0}}'/>
+                <text style='font-size: 30rpx' hidden='{{num<=0}}'>{{num}}</text>
+                <icon class='icon iconfont icon-add2' data-id='{{item.id}}' bindtap='addNum'/>
+            </view>
           </view>
         </view>
       </view>
     </view>
   </scroll-view>
 </view>
-
 
 <!-- 购物车 -->
 <mask hidden="{{!showCart}}" class='mask'/>

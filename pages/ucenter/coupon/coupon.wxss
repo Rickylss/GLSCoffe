@@ -1,0 +1,101 @@
+/* pages/ucenter/coupon/coupon.wxss */
+@import "../../../styles/iconfont.wxss";
+@import "../../loading/loading.wxss";
+
+.coupon_cells{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 18rpx auto;
+}
+
+.coupon_invalid {
+  opacity: 0.5;
+}
+
+.coupon_cell{
+  width: 100%;
+  border-radius: 20rpx;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 2rpx #888888;
+}
+
+.coupon_cell_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.coupon_cell_left {
+  width: 190rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.coupon_cell_right {
+  height: 140rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.coupon_cell_right_category {
+  font-size: 28rpx; 
+  font-weight: 550; 
+}
+
+.coupon_cell_right_time{
+  font-size: 30rpx;
+  margin-top: 13rpx;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.coupon_cell_right_rule {
+  font-size: 25rpx; 
+  opacity: 0.7; 
+}
+
+.coupon_cell_use {
+  width: 15%;
+  font-size: 25rpx;
+  text-align: center;
+  padding: 8rpx 10rpx;
+  margin-right: 20rpx;
+  border-radius: 30rpx;
+  background-color: rgba(183, 108, 37, 0.829);
+  color: #ffffff;
+}
+
+.coupon_cell_rules {
+  border-radius: 20rpx;
+  background-color: #fcfcfc;
+  width: 100%;
+  z-index: -1;
+}
+
+.coupon_cell_rules_info {
+  width: 93%;
+  margin: 20rpx auto;
+  font-size: 25rpx;
+  opacity: 0.5;
+}
+
+.hid_rules {
+  display: none;
+}
+
+.red {
+  color: red;
+}

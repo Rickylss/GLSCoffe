@@ -8,7 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasOrder: true,
     orderList: [],
     loading: {
       loadingShow: true,
@@ -60,7 +59,6 @@ Page({
         console.log("获取所有订单信息成功");
       }).catch((err) => {
         that.setData({
-          hasOrder: false,
           'loading.loadingShow': false,
           'loading.loadingError': true,
         });
@@ -98,7 +96,7 @@ Page({
   * 开始点单
   */
   tapOrder: function () {
-    if (!this.data.hasOrder) {
+    if (this.data.orderList.length <= 0) {
       wx.navigateTo({
         url: '../../shopcenter/index/index',
       });

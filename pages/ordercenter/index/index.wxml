@@ -1,17 +1,7 @@
 <!--pages/orders/orders.wxml-->
 <include src="../../loading/loading.wxml"/>
 <!-- 无订单信息 -->
-<block wx:if="{{!hasOrder}}">
-  <view class='no_order'>
-    <view style='text-align: center; width: 100%; padding: 30% 0;'>
-      <text>暂无订单信息</text>
-    </view>
-  </view>
-  <view class="start_order" bindtap='tapOrder'>
-    <view style='color: #ffffff'>开始点单</view>
-  </view>
-</block>
-<block wx:else>
+<block wx:if="{{orderList.length>0}}">
   <view class="orders">
     <block  wx:for="{{orderList}}" wx:key="orderId">
       <view class="order_cell" data-orderid='{{item.orderId}}' bindtap="gotoOrder">
@@ -22,7 +12,7 @@
         <text class='order_time_spend' space='ensp' >下单时间：{{item.orderTime}}</text>
         <text class='order_time_spend' space='ensp'>总价：    ￥{{item.spend}}</text>
         <view class='order_appraise'>
-          <text class='order_appraise_pinjia' space='ensp'>评价:</text>
+          <text class='order_appraise_pinjia' space='ensp'>备注:</text>
           <view class='order_appraise_text' >{{item.appraise}}</view>
         </view>
       </view>
@@ -32,6 +22,17 @@
     </view>
   </view>
 </block>
+<block wx:else>
+  <view class='no_order'>
+    <view style='text-align: center; width: 100%; padding: 30% 0;'>
+      <text>暂无订单信息</text>
+    </view>
+  </view>
+  <view class="start_order" bindtap='tapOrder'>
+    <view style='color: #ffffff'>开始点单</view>
+  </view>
+</block>
+
 
 
 

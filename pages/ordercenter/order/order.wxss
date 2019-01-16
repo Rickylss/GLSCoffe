@@ -153,26 +153,6 @@
   font-size: 28rpx;
 }
 
-.invoice {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 15rpx auto;
-}
-
-.invoice_chose {
-  font-size: 35rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-}
-
-.invoice_text {
-  font-size: 30rpx;
-  opacity: 0.4;
-}
-
 .remark_cell {
   margin: 0 auto;
   width: 95%;
@@ -244,4 +224,42 @@
 .takeself_font {
   font-size: 30rpx;
   opacity: 0.5;
+}
+
+.coupon_cell{
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.coupon_cell_left {
+  width: 200rpx;
+  height: 190rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.coupon_cell_right {
+  height: 140rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.coupon_cell_right_category {
+  font-size: 30rpx; 
+  font-weight: 550; 
+}
+
+.coupon_cell_right_time{
+  font-size: 45rpx;
+  margin-top: 13rpx;
+  font-weight: 600;
+  color: #ee542d;
 }

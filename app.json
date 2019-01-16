@@ -1,7 +1,7 @@
 {
   "pages":[  
 
-    "pages/ucenter/index/index",
+    "pages/ordercenter/index/index",
     "pages/index/index",
 
     "pages/shopcenter/payment/payment",
@@ -16,11 +16,9 @@
     "pages/auth/reset/reset",
     "pages/auth/login/login",
 
-
     "pages/ordercenter/order/order",
-    "pages/ordercenter/index/index",
 
-
+    "pages/ucenter/index/index",
     "pages/ucenter/address/setAddress/setAddress",
     "pages/ucenter/vip/vip",
     "pages/ucenter/address/address",

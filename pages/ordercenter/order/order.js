@@ -41,6 +41,7 @@ Page({
       loadingShow: true,
       loadingError: false,
     },
+    couponInfo: {},
   },
 
   /**
@@ -54,6 +55,9 @@ Page({
           user: wx.getStorageSync("userInfo").userId,
           orderId: options.id,
         }, "POST").then((res) => {
+          if(res.couponId){
+            that.getCoupon(res.couponId);
+          }
           if (res) {
             that.setData({
               orderInfo: res,
@@ -74,6 +78,22 @@ Page({
         });
     }
 
+  },
+
+  /**
+   * 获取优惠券信息
+   */
+  getCoupon: function(couponId) {
+    var that = this;
+    util.request(api.GetUsedCouponByID,{
+      id: couponId
+    },"POST").then((res)=>{
+      if(res){
+        that.setData({
+          couponInfo: res,
+        });
+      }
+    }).catch();
   },
 
   /**

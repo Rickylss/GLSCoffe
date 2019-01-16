@@ -20,6 +20,7 @@ module.exports = {
   DeleteAddressById: WxApiRoot + 'address/deleteAddressById', //根据addressId删除Address信息--ucenter/address/setaddress
   UpdateAddressById: WxApiRoot + 'address/updateAddressById', //根据addressId更新Address信息--ucenter/address/setaddress
   GetCouponListById: WxApiRoot + 'coupon/getcouponListById', //根据userId获取couponList--ucenter/coupon
+  GetUsedCouponByID: WxApiRoot + 'coupon/getUsedcouponById', //根据couponId获取coupon--ordercenter/order
   AuthLoginByWeixin: WxApiRoot + 'auth/login_by_weixin', //微信登陆
   GetList: 'https://www.easy-mock.com/mock/59abab95e0dc66334199cc5f/coco/aa', //获取商品信息
 };

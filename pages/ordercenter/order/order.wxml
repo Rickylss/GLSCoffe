@@ -42,6 +42,19 @@
     
     <view class='cut_line'/>
 
+    <view class="coupon_cell">
+      <view class='coupon_cell_left' >
+        <view style='font-size: 35rpx; color: #33dd8e;' >￥<text style='font-size: 55rpx;'>{{couponInfo.shortCut}}</text> </view>
+        <view style='font-size: 30rpx; color: #33dd8e;' >优惠券</view>
+      </view>
+      <view class='coupon_cell_right'>
+        <view class='coupon_cell_right_category'>适用分类：{{couponInfo.category}}</view>
+        <view class="coupon_cell_right_time" >已使用</view>
+      </view>
+    </view>
+
+    <view class='cut_line'/>
+
     <view class="order_info">
       <view class="order_info_cell" wx:for="{{orderInfo.goods}}" wx:key="name">
         <view class='order_info_more'>
@@ -53,18 +66,11 @@
       </view>
       <view class='order_info_cost_cell'>
         <view style='font-size: 30rpx;' >已优惠</view>
-        <view style='font-size: 30rpx; color: red;' >￥{{orderInfo.offer}}</view>
+        <view style='font-size: 30rpx; color: red;' >￥{{couponInfo.shortCut}}</view>
         <view style='font-size: 30rpx; margin-left: 30rpx;' >合计 ￥</view>
         <view style='font-size: 44rpx; line-height: 44rpx;' >{{orderInfo.total}}</view>
       </view>
     </view>
-    <block wx:if="{{orderInfo.invoiceInfo.type}}">
-      <view class='cut_line'/>
-      <view class="invoice">
-        <view class='invoice_chose'>{{orderInfo.invoiceInfo.title}}</view>
-        <view class='invoice_text'>税号：{{orderInfo.invoiceInfo.taxNumber}}</view>
-      </view>
-    </block>
     <view class='cut_line'/>
     <view class='remark_cell' >
       <text style='color: rgb(183, 108, 37); font-size: 37rpx;' >备注：</text>

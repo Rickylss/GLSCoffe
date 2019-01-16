@@ -11,10 +11,18 @@ const shopLocationStr = "杭州西湖橄榄山咖啡";
 const defaultScale = 14;
 const mapID = "coffeMap";
 
+//起送费用
+const okToSend = 20;
+
+//促销消息
+const promotionInfo = "第二杯半价";
+
 module.exports = {
-  tencentAk: tencentAk,
-  shopLocation: shopLocation,
-  defaultScale: defaultScale,
-  shopLocationStr: shopLocationStr,
-  mapID: mapID,
+  tencentAk,
+  shopLocation,
+  defaultScale,
+  shopLocationStr,
+  mapID,
+  okToSend,
+  promotionInfo,
 }

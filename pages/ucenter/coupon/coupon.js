@@ -83,10 +83,10 @@ Page({
    * 立即使用
    */
   tapUse: function(e) {
-    var couponid = e.currentTarget.dataset.couponid;
-    if (couponid){
+    var categoryid = e.currentTarget.dataset.categoryid;
+    if (categoryid){
       wx.navigateTo({
-        url: '/pages/shopcenter/index/index?couponid=' + couponid,
+        url: '/pages/shopcenter/index/index?categoryid=' + categoryid,
       })
     }
   },

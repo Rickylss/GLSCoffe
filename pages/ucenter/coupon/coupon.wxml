@@ -1,7 +1,7 @@
 <!--pages/ucenter/coupon/coupon.wxml-->
 <include src="../../loading/loading.wxml"/>
 
-<view class="coupon_cells  {{item.timeTag==0?'coupon_invalid':''}}" wx:for="{{couponList}}" wx:key="id">
+<view class="coupon_cells  {{item.timeTag==0?'coupon_invalid':''}}" data-index='{{index}}' wx:for="{{couponList}}" wx:key="id">
   <view class="coupon_cell">
     <view class='coupon_cell_info' >
       <view class='coupon_cell_left' >
@@ -14,7 +14,7 @@
         <view class='coupon_cell_right_rule' data-index='{{index}}' bindtap='showRules' >使用规则<icon class="icon iconfont {{ruleTaped[index]?'icon-up':'icon-down'}}"/></view>
       </view>
     </view>
-    <view class="coupon_cell_use" wx:if="{{item.timeTag!=0}}" data-couponid='{{item.id}}' bindtap='tapUse'>立即使用</view>
+    <view class="coupon_cell_use" wx:if="{{item.timeTag!=0}}" data-categoryid='{{item.categoryId}}' bindtap='tapUse'>立即使用</view>
   </view>
   <view class="coupon_cell_rules {{ruleTaped[index]?'':'hid_rules'}}">
     <view class="coupon_cell_rules_info">{{item.rules}}</view>

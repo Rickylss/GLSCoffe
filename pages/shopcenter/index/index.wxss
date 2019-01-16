@@ -1,5 +1,6 @@
 /* pages/list/list.wxss */
 @import "/styles/iconfont.wxss";
+@import "/styles/animate.wxss";
 @import "../../loading/loading.wxss";
 
 .banner {
@@ -142,16 +143,17 @@
   flex: row;
   justify-content: center;
   align-items: center;
-  background-color: rgb(240, 163, 92);
+  background-color: rgba(240, 163, 92, 0.774);
 }
 
 .shortCut_hid {
-  visibility: hidden;
+  display: none;
 }
 
 .shortCut_text {
   font-size: 22rpx;
   font-weight: 600;
+  color: #000000;
 }
 
 .cart {

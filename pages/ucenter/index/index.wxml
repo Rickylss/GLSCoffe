@@ -7,43 +7,43 @@
 </view>
 
 <view class="userCenter">
-  <view class='userCenter_cell' bindtap='tapAddress'>
+  <button class='userCenter_cell' hover-class="none" bindtap='tapAddress'>
     <view class='userCenter_cell_tag'>
       <view class='icon iconfont icon-dizhi'></view>
       <text class='userCenter_cell_font'>地址</text>
     </view>
     <view class='icon iconfont icon-more'></view>
-  </view>
+  </button>
   <view class='line'></view>
-  <view class='userCenter_cell' bindtap='tapVIP'>
+  <button class='userCenter_cell' hover-class="none" bindtap='tapVIP'>
     <view class='userCenter_cell_tag'>
       <view class='icon iconfont icon-huiyuan'></view>
       <text class='userCenter_cell_font'>会员</text>
     </view>
     <view class='icon iconfont icon-more'></view>
-  </view>
+  </button>
   <view class='line'></view>
-  <view class='userCenter_cell' bindtap='tapInvoice'>
+  <button class='userCenter_cell' hover-class="none" bindtap='tapCoupon'>
     <view class='userCenter_cell_tag'>
-      <view class='icon iconfont icon-fapiao'></view>
-      <text class='userCenter_cell_font'>发票</text>
+      <view class='icon iconfont icon-coupon'></view>
+      <text class='userCenter_cell_font'>优惠券</text>
     </view>
     <view class='icon iconfont icon-more'></view>
-  </view>
+  </button>
   <view class='line'></view>
-  <view class='userCenter_cell' bindtap='tapCustomer'>
+  <button class='userCenter_cell' hover-class="none" open-type="contact">
     <view class='userCenter_cell_tag'>
       <view class='icon iconfont icon-kefu'></view>
       <text class='userCenter_cell_font'>客服</text>
     </view>
     <view class='icon iconfont icon-more'></view>
-  </view>
+  </button>
   <view class='line'></view>
-  <view class='userCenter_cell' bindtap='tapAbout'>
+  <button class='userCenter_cell' hover-class="none" bindtap='tapAbout'>
     <view class='userCenter_cell_tag'>
       <view class='icon iconfont icon-about'></view>
       <text class='userCenter_cell_font'>关于</text>
     </view>
     <view class='icon iconfont icon-more'></view>
-  </view>
+  </button>
 </view>

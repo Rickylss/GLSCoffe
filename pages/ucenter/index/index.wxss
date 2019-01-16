@@ -43,7 +43,14 @@
   align-items: center;
   text-align: start;
   width: 80%;
-  margin: 5% 0;
+}
+
+button {
+  background-color: #ffffff;
+}
+
+button::after{
+  border: none;
 }
 
 .line {

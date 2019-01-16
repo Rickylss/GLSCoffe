@@ -58,20 +58,11 @@ Page({
   },
 
   /**
- * 点击发票
+ * 点击优惠券
  */
-  tapInvoice: function () {
+  tapCoupon: function () {
     wx.navigateTo({
-      url: '/pages/ucenter/invoice/invoice',
-    })
-  },
-
-  /**
- * 点击客服
- */
-  tapCustomer: function () {
-    wx.navigateTo({
-      url: '/pages/ucenter/customer/customer',
+      url: '/pages/ucenter/coupon/coupon',
     })
   },
 

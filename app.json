@@ -1,25 +1,30 @@
 {
   "pages":[  
 
-
-
-    "pages/shopcenter/index/index",
-    "pages/shopcenter/payment/payment",
-    "pages/shopcenter/map/map",
+    "pages/ucenter/index/index",
     "pages/index/index",
+
+    "pages/shopcenter/payment/payment",
+    "pages/shopcenter/index/index",
+
+
+    "pages/shopcenter/map/map",
+
     
     "pages/auth/accountLogin/accountLogin",
     "pages/auth/register/register",
     "pages/auth/reset/reset",
+    "pages/auth/login/login",
 
 
     "pages/ordercenter/order/order",
     "pages/ordercenter/index/index",
-    "pages/ucenter/index/index",
-    "pages/ucenter/address/address",
+
+
     "pages/ucenter/address/setAddress/setAddress",
     "pages/ucenter/vip/vip",
-    "pages/ucenter/invoice/invoice",
+    "pages/ucenter/address/address",
+    "pages/ucenter/coupon/coupon",
     "pages/ucenter/about/about",
     "pages/ucenter/customer/customer",
     "pages/Ricky/Ricky",

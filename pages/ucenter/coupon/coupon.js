@@ -23,7 +23,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    if (true) {
+    if (app.globalData.hasLogin) {
       util.request(api.GetCouponListById, {
         userId: 1,
       }, "POST").then((res) => {

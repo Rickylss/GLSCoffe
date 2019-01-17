@@ -2,13 +2,8 @@
 var api = require('../../../navigator/api.js')
 var constant = require("../../../utils/constant.js");
 var util = require("../../../utils/util.js")
+var map = require("../../../utils/map.js")
 var app = getApp();
-var QQMapWX = require('../../../lib/qqmap-wx-jssdk.js');
-var qqmapsdk;
-var mapID = "coffeMap";
-var defaultScale = 14;
-var shopLatitude = '28.688697871245807';
-var shopLongitude = '115.97130918514567';
 
 Page({
 
@@ -16,14 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    chosedAddress: {
-      "default": false,
-      "addressId": 1,
-      "costomerName": "肖海飚",
-      "gender": 1,
-      "phoneNumber": "2325678",
-      "address": "鄱湖云科技有限公司",
-    },
+    chosedAddress: {},
     loading: {
       loadingShow: false,
       loadingError: false,
@@ -31,16 +19,10 @@ Page({
     switchShowUp: true,
     sendTime: "立即送出",
     arriveTime: "已送达",
-    orderInfo: [
-      { id: 1, name: "world", tag: "加热+加糖", price: 7, num: 1, },
-      { id: 2, name: "hello", tag: "加热", price: 16, num: 1, },
-      { id: 3, name: "world", tag: "加糖", price: 7, num: 1, },
-      { id: 4, name: "hello", tag: "加热+加糖", price: 16, num: 1, },
-      { id: 5, name: "world", tag: "加热", price: 7, num: 1, },
-      { id: 6, name: "hello", tag: "加糖", price: 16, num: 1, },
-      { id: 7, name: "heaadfasfllo", tag: "加热加糖", price: 32, num: 1, }
-    ],
-    cost: 12,
+    cartInfo: {
+      goodsList: [],
+      cost: 0.0,
+    },
     remarks: '',
     remarkPlaceholder: "饮品中规格可参阅订单中的显示，若有其他要求，请说明。",
     takeselfTime: '12:00',
@@ -52,6 +34,7 @@ Page({
       subKey: constant.tencentAk,
       mapID: constant.mapID,
       scale: constant.defaultScale,
+      shopLocation: constant.shopLocationStr,
       shopInfo: [{
         iconPath: '../../../images/dog-select.png',
         id: 0,
@@ -77,9 +60,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    qqmapsdk = new QQMapWX({ key: constant.tencentAk });
+ 
+  },
+
+  onShow: function() {
+    var that = this;
     if (app.globalData.hasLogin) {
-      
+      util.request(api.GetDefaultAddressByUId, {
+
+      }, "POST").then((res) => {
+        that.setData({
+          cartInfo: wx.getStorageSync("cartInfo"),
+          chosedAddress: res,
+        });
+      });
     } else {
       util.toUserLogin().catch((err) => {
         console.log(err);
@@ -88,53 +82,6 @@ Page({
         })
       });
     }
-  },
-
-  onShow: function() {
-    this.setData({
-      chosedAddress: wx.getStorageSync('defaultAddress'),
-    });
-    console.log(this.data.choseAddress);
-  },
-
-  /**
-   * 设置用户权限，初始化地图
-   */
-  scopeSetting: function () {
-    var that = this;
-    return new Promise(function (resolve, reject) {
-      util.getSetting().then((res) => {
-        if (!res.authSetting['scope.userLocation']) {
-          util.authorize("scope.userLocation").then((res) => {
-            resolve(res);
-          }).catch((err) => {
-            wx.showModal({
-              title: '提示',
-              content: '定位失败，您未开启定位权限，点击开启定位权限',
-              success: function (res) {
-                if (res.confirm) {
-                  wx.openSetting({
-                    success: function (res) {
-                      if (res.authSetting['scope.userLocation']) {
-                        resolve(res);
-                      } else {
-                        reject();
-                        console.log("用户未同意地理位置权限");
-                      }
-                    }
-                  });
-                }
-              }
-            })
-          });
-        } else {
-          resolve(res);
-        }
-      }).catch((err) => {
-        console.log(err);
-        reject(err);
-      });
-    });
   },
 
   /** 
@@ -151,82 +98,14 @@ Page({
             'mapInfo.longitude': res.longitude,
           });
           // console.log(that.data.mapInfo);
-          var mapCtx = wx.createMapContext(mapID);
+          var mapCtx = wx.createMapContext(that.data.mapID);
           mapCtx.moveToLocation();
-          that.calculateDistance();
-          that.regeocodingAddress();
           resolve();
         },
         fail: function (err) {
           reject(err);
         }
       })
-    });
-  },
-
-  /**
-   * 计算距离
-   */
-  calculateDistance: function () {
-    var that = this;
-    return new Promise(function (resolve, reject) {
-      qqmapsdk.calculateDistance({
-        from: {
-          latitude: that.data.mapInfo.latitude,
-          longitude: that.data.mapInfo.longitude,
-        },
-        to: [
-          {
-            latitude: that.data.mapInfo.shopInfo[0].latitude,
-            longitude: that.data.mapInfo.shopInfo[0].longitude,
-          }
-        ],
-        success: function (res) {
-          var distance = res.result.elements[0].distance;
-          if (distance < 1000) {
-            var distanceStr = "距您" + distance + "m";
-          } else {
-            var distanceStr = "距您" + ((distance * 1.000) / 1000) + "km";
-          }
-          that.setData({
-            'mapInfo.shopInfo[0].callout.content': distanceStr,
-          });
-          resolve();
-        },
-        fail: function (error) {
-          reject(error);
-        },
-        complete: function (res) {
-          console.log(that.data.mapInfo.shopInfo[0].callout.content);
-        }
-      });
-    });
-  },
-
-  /**
-   * 逆地址解析
-   */
-  regeocodingAddress: function () {
-    var that = this;
-    return new Promise(function (resolve, reject) {
-      qqmapsdk.reverseGeocoder({
-        location: {
-          latitude: that.data.mapInfo.shopInfo[0].latitude,
-          longitude: that.data.mapInfo.shopInfo[0].longitude
-        },
-        success: function (res) {
-          that.setData({
-            'mapInfo.shopLocation': res.result.address,
-          });
-          resolve();
-        },
-        fail: function (err) {
-          reject(err);
-        },
-        complete: function (res) {
-          console.log(res);
-        }
-      });
     });
   },
 
@@ -260,13 +139,27 @@ Page({
           switchShowUp: false,
           mapInitReady: true,
         });
-        this.scopeSetting().then(() => {
-          this.initMap();
+        map.scopeSetting().then(() => {
+          this.initMap().then(()=>{
+            var localAddress = {
+              latitude: that.data.mapInfo.latitude,
+              longitude: that.data.mapInfo.longitude
+            };
+            map.calculateDistance(localAddress).then((res)=>{
+              if (res < 1000) {
+                var distanceStr = "距您" + res + "m";
+              } else {
+                var distanceStr = "距您" + ((res * 1.000) / 1000) + "km";
+              }
+              that.setData({
+                'mapInfo.shopInfo[0].callout.content': distanceStr,
+                switchShowUp: false,
+                mapInitReady: true,
+              });
+            });
+          });
         });
       }
-      this.setData({
-        switchShowUp: false,
-      });
     }
   },
 

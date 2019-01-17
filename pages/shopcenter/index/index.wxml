@@ -42,7 +42,7 @@
 </view>
 
 <!-- 弹窗 -->
-<view hidden='{{!popUp}}'>
+<view hidden='{{!popUp}}' catchtouchmove='move'>
    <view class='mask' style='z-index: 11;' catchtouchmove='move' bindtap='tapMask'/>
    <view class='popup_cells'>
     <view class='popup_cell_tag'>{{goodsInfo.name}}</view>
@@ -63,7 +63,7 @@
 
 <!-- 购物车 -->
 <view hidden="{{!showCart}}" class='mask' catchtouchmove='move' bindtap='showCartList'/>
-<view class='foot height'>
+<view class='foot height' catchtouchmove='move'>
   <view class="shortCut_cell {{cartInfo.cost==0||!promotionInfo?'shortCut_hid':''}}">
     <view class='shortCut_text'>{{promotionInfo}}</view>
   </view>
@@ -76,7 +76,7 @@
         <view class='cartList_float_bar_text'>清空购物车</view>
       </view>
     </view>
-    <scroll-view class="cartList_float_cells_scroll {{cartInfo.goodsList.length>5?'cart-scroll-height':''}}" scroll-y="true">
+    <scroll-view class="cartList_float_cells_scroll {{cartInfo.goodsList.length>=5?'cart-scroll-height':''}}" scroll-y="true">
       <view class='cartList_float_cells' wx:for="{{cartInfo.goodsList}}" wx:key="id">
         <view class='cartList_float_text'>
           <view class='cartList_float_text_name'>{{item.name}}</view>

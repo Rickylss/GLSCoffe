@@ -43,7 +43,7 @@
   </view>
   <view class='cut_line'/>
   <view class="order_info">
-    <view class="order_info_cell" wx:for="{{orderInfo}}" wx:key="name">
+    <view class="order_info_cell" wx:for="{{cartInfo.goodsList}}" wx:key="name">
       <view class='order_info_more'>
         <text class="order_info_more_name">{{item.name}}</text>
         <text class="order_info_more_remark">{{item.tag}}</text>
@@ -51,11 +51,6 @@
       <text class='number_font_1'>￥{{item.price}}</text>
       <text class='number_font_2'>x{{item.num}}</text>
     </view>
-  </view>
-  <view class='cut_line'/>
-  <view class="invoice" >
-    <view class='invoice_chose' bindtap='choseInvoice'>发票</view>
-    <view class='invoice_text'>该商家暂不支持发票</view>
   </view>
   <view class='cut_line'/>
   <view class='remark_cell'>
@@ -66,9 +61,9 @@
 <view style='height: 120rpx;background-color: #efefef; margin-top: 20rpx'/>
 
 
-<view class='cart'>
-  <view class='cart_text'>合计 ￥{{cost}}</view>
-  <view class="cart_btn" bindtap='pay'>
-    <view class='cart_btn_font' >确认支付</view>
-  </view>
-</view>
+<cover-view class='cart'>
+  <cover-view class='cart_text'>合计 ￥{{cartInfo.cost}}</cover-view>
+  <cover-view class="cart_btn" bindtap='pay'>
+    <cover-view class='cart_btn_font' >确认支付</cover-view>
+  </cover-view>
+</cover-view>

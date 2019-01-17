@@ -32,16 +32,8 @@ Page({
     toView: 'a0',
     leftScrollTop: 0,
     cartInfo: {
-      goodsList: [
-        { id: 1, name: "world", tag: "加热加糖", price: 7, num: 1, },
-        { id: 2, name: "hello", tag: "加热", price: 16, num: 1, },
-        { id: 3, name: "world", tag: "加糖", price: 7, num: 1, },
-        { id: 4, name: "hello", tag: "加热加糖", price: 16, num: 1, },
-        { id: 5, name: "world", tag: "加热", price: 7, num: 1, },
-        { id: 6, name: "hello", tag: "加糖", price: 16, num: 1, },
-        { id: 7, name: "heaadfasfllo", tag: "加热加糖", price: 32, num: 1, }
-      ],
-      cost: 28.0,
+      goodsList: [],
+      cost: 0.0,
     },
   },
 
@@ -213,18 +205,6 @@ Page({
   },
 
   /**
-   * 点击付款
-   */
-  pay: function () {
-    if (this.data.cartInfo.goodsList.length != 0) {
-      wx.setStorageSync("cartInfo", this.data.cartInfo)
-      wx.navigateTo({
-        url: '/pages/shopcenter/payment/payment',
-      })
-    }
-  },
-
-  /**
    * 切换banner
    */
   switchBanner: function (scrollTop) {
@@ -333,6 +313,18 @@ Page({
       });
   },
 
+  /**
+   * 点击付款
+   */
+  pay: function () {
+    if (this.data.cartInfo.goodsList.length != 0) {
+      wx.setStorageSync("cartInfo", this.data.cartInfo)
+      wx.navigateTo({
+        url: '/pages/shopcenter/payment/payment',
+      })
+    }
+  },
+  
   /**
    * scroll-view 滚动层穿透问题
    */

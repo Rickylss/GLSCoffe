@@ -12,6 +12,7 @@ Page({
     okToSend: constant.okToSend,
     promotionInfo: constant.promotionInfo,
     showCart: false,
+    popUp: false,
     listHeight: 0,
     loading: {
       loadingShow: true,
@@ -22,9 +23,12 @@ Page({
       url: "../../../images/2-1.jpg",
     },
     listData: [],
+    goodsInfo: {},
     itemSpace: [],
     menuSpace: [],
     activeIndex: 0,
+    activePopIndexList: [0,0,0,0],
+    itemList: [],
     toView: 'a0',
     leftScrollTop: 0,
     cartInfo: {
@@ -50,6 +54,79 @@ Page({
     this.getListData();
     if (options.categoryid>=0){
       this.jumpToCategory(options.categoryid);
+    }
+  },
+
+  /**
+   * 加入购物车
+   */
+  addToCart: function(e) {
+    var goodDic = {};
+    var goodsInfo = this.data.goodsInfo;
+    var goodsList = this.data.cartInfo.goodsList;
+    var itemList = this.data.itemList;
+    var tag = itemList.join("+");
+
+    goodDic["tag"] = tag;
+    goodDic["id"] = goodsInfo.item_id;
+    goodDic["name"] = goodsInfo.name;
+    goodDic["price"] = goodsInfo.specfoods[0].price;
+    goodDic["num"] = 1;
+
+    goodsList.push(goodDic);
+    this.setData({
+      'cartInfo.goodsList': goodsList,
+      'cartInfo.cost': this.data.cartInfo.cost + goodDic["price"],
+      popUp: false,
+    });
+  },
+
+  /**
+   * 选择弹窗内容
+   */
+  choseSE: function(e) {
+    var activePopIndexList = this.data.activePopIndexList;
+    var itemList = this.data.itemList;
+    var activePopType = e.currentTarget.dataset.type;
+    var activePopIndex = e.currentTarget.dataset.index;
+    itemList[activePopType] = e.currentTarget.dataset.name;
+    activePopIndexList[activePopType] = activePopIndex;
+    this.setData({
+      activePopIndexList: activePopIndexList,
+      itemList: itemList,
+    });
+  },
+
+  /**
+   * 添加弹窗
+   */
+  selectInfo: function(e) {
+    var that = this;
+    var itemListDef = [];
+    var currentType = e.currentTarget.dataset.type;
+    var currentGoods = e.currentTarget.dataset.index;
+    var goodsInfo = this.data.listData[currentType].foods[currentGoods];
+
+    goodsInfo.attrs.forEach(function(e){
+      itemListDef.push(e.values[0]);
+    });
+
+    that.setData({
+      popUp: true,
+      goodsInfo: goodsInfo,
+      itemList: itemListDef,
+      activePopIndexList: [0, 0, 0, 0],
+    });
+  },
+
+  /**
+   * 隐藏info弹窗
+   */
+  tapMask: function() {
+    if(this.data.popUp) {
+      this.setData({
+        popUp: false,
+      });
     }
   },
 
@@ -128,7 +205,7 @@ Page({
   clearCartList: function () {
     console.log("clear cartlist success")
     this.setData({
-      'cartInfo.goodsList': '',
+      'cartInfo.goodsList': [],
       'cartInfo.cost': 0,
       showCart: false,
     });

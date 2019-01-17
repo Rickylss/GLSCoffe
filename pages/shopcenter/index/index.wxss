@@ -303,3 +303,77 @@
 .cartList_float_num {
   font-size: 34rpx;
 }
+
+.popup_cells {
+  padding: 30rpx 20rpx;
+  background-color: #ffffff;
+  width: 88%;
+  border-radius: 20rpx;
+  z-index: 12;
+  position: fixed;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.popup_cell_tag {
+  width: 100%;
+  text-align: center;
+  font-size: 35rpx;
+}
+
+.popup_cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.popup_cell_name {
+  font-size: 35rpx;
+  opacity: 0.5;
+  margin-top: 20rpx;
+}
+
+.popup_cell_info{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.popup_cell_info_cell {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  border: 1rpx solid rgb(183, 108, 37);
+  border-radius: 10rpx;
+  padding: 10rpx 20rpx;
+  margin-right: 20rpx;
+}
+
+.select-active {
+  color: #ffffff;
+  background-color: rgb(183, 108, 37);
+}
+
+.popup_cell_cost {
+  color: rgb(183, 108, 37);
+  font-size: 45rpx;
+  margin: 20rpx 0;
+}
+
+.popup_cell_confirm {
+  color: #ffffff;
+  text-align: center;
+  font-size: 35rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  padding: 20rpx 30%;
+  background-color: rgb(183, 108, 37);
+  border-radius: 10rpx;
+}

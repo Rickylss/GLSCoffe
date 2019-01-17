@@ -6,7 +6,7 @@
 </view>
 <view class="list" style='height: {{listHeight}}px;'>
   <!-- 左侧菜单 -->
-  <scroll-view class="list_left_menu" scroll-y="true" scroll-top="{{leftScrollTop}}" bindscroll="scrollLeftMenu">
+  <scroll-view class="list_left_menu" scroll-y="true" scroll-top="{{leftScrollTop}}" bindscroll="scrollLeftMenu" scroll-with-animation="true">
     <view class='listMenuHeight' wx:for="{{listData}}" wx:key="unique" data-index='{{index}}' bindtap='selectMenu'>
       <view class="list_menu_cell {{index==activeIndex?'list-left-menu-box-selected':''}}">
         <view class="list_menu_name">

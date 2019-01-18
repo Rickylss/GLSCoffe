@@ -1,5 +1,6 @@
 {
   "pages":[  
+
     "pages/index/index",
     "pages/shopcenter/map/map",
     "pages/shopcenter/payment/payment",

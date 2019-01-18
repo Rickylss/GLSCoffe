@@ -122,6 +122,11 @@ Page({
     })
     var mapCtx = wx.createMapContext(that.data.mapInfo.mapID);
     mapCtx.moveToLocation();
+    wx.openLocation({
+      latitude: that.data.mapInfo.latitude,
+      longitude: that.data.mapInfo.longitude,
+      scale: 18,
+    })
   },
 
   /**

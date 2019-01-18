@@ -4,11 +4,13 @@
 const tencentAk = 'J6LBZ-EDJKO-VHCWA-SOX3M-GDKP5-PVFP7';
 
 //橄榄山咖啡馆地址
-const shopLatitude = '28.68992139487328';
-const shopLongitude = '115.95916341796875';
+const shopLatitude1 = '28.67877739225488';
+const shopLongitude1 = '116.03091787353516';
+const shopLatitude = '28.677421959702606'; 
+const shopLongitude = '115.94422887817383'; 
 const shopLocation = shopLatitude +','+ shopLongitude;
 const shopLocationStr = "杭州西湖橄榄山咖啡";
-const defaultScale = 12;
+const defaultScale = 16;
 const mapID = "coffeMap";
 
 //起送费用
@@ -18,6 +20,8 @@ const okToSend = 20;
 const promotionInfo = "第二杯半价";
 
 module.exports = {
+  shopLatitude,
+  shopLongitude,
   tencentAk,
   shopLocation,
   defaultScale,

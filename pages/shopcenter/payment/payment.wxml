@@ -28,7 +28,7 @@
   </view>
   <view class="takeself" hidden="{{switchShowUp}}">
     <view class='takeself_shopLocation'>{{mapInfo.shopLocation}}</view>
-    <map id="coffeMap" class="takeself_map" subkey="{{mapInfo.subKey}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{{mapInfo.scale}}" show-location="true" markers="{{mapInfo.shopInfo}}"  bindtap='bindShowFullMap'/>
+    <map id="coffeMap" class="takeself_map" subkey="{{mapInfo.subKey}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{{mapInfo.scale}}" show-location="true" markers="{{mapInfo.shopInfo}}" bindtap='bindShowFullMap'/>
     <view class="takeself_cell">
       <view class="takeself_time_cell" bindtap='choseTime'>
         <view class='takeself_font'>自取时间:</view>

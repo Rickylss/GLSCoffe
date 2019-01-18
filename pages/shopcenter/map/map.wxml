@@ -1,5 +1,29 @@
 <!--pages/map/map.wxml-->
-<map id="coffeMap" class="takeself_map" subkey="{{mapInfo.tencentMap}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" scale="{{mapInfo.scale}}" show-location="true" bindtap='bindShowFullMap'>
-  <cover-image src='../../../images/return.png' hidden='{{!mapInfo.showFullMap}}' class='fix_map_return' bindtap='goBack'/>
-  <cover-image src='../../../images/self-location.png' hidden='{{!mapInfo.showFullMap}}' class='fix_map_local' bindtap="selfLocationClick"/>
+<map id="coffeMap" class="map" subkey="{{mapInfo.subKey}}" longitude="{{mapInfo.longitude}}" latitude="{{mapInfo.atitude}}" show-location="true" markers='{{mapInfo.shopInfo}}' scale="{{mapInfo.scale}}" polyline="{{mapInfo.polyline}}" show-compass="true">
+  <cover-image src='../../../images/self-location.png' class='map_local' bindtap="selfLocationClick"/>
+  
+  <cover-view class='navigate' bindtap='startNav'>开始导航</cover-view>
+  <cover-view class='panel' hidden='{{!showPanel}}'>
+    <cover-view class='panel_one'>
+      <cover-view class='panel_one_info'>
+        <cover-view style='font-size: 40rpx; margin-bottom: 10rpx;'>终点：{{mapInfo.shopLocation}}</cover-view>
+        <cover-view style='font-size: 30rpx;'>起点：当前位置</cover-view>
+      </cover-view>
+      <cover-view class='icon iconfont icon-close' bindtap='hidPanel'/>
+    </cover-view>
+    <cover-view class='panel_two'>
+      <cover-view>距离：{{distance}}米</cover-view>
+    </cover-view>
+    <cover-view class='panel_three'>
+      <cover-view class="icon iconfont icon-drive {{transport==0?'chosed':''}}" data-index='0' bindtap='choseTransport'/>
+      <cover-view class="icon iconfont icon-walk {{transport==1?'chosed':''}}" data-index='1' bindtap='choseTransport'/>
+      <cover-view class="icon iconfont icon-bus {{transport==2?'chosed':''}}" data-index='2' bindtap='choseTransport'/>
+    </cover-view>
+  </cover-view>
 </map>
+
+
+
+
+
+

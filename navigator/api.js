@@ -1,4 +1,6 @@
 // 以下是业务服务器API地址
+//腾讯地图
+var TencentRoot = "https://apis.map.qq.com/ws/direction/v1/";
 //easy mock
 var WxApiRoot = 'https://www.easy-mock.com/mock/5c259b3ec2518a5416c67c75/candyfloss-wx/';
 // 本机开发时使用
@@ -11,6 +13,9 @@ var WxApiRoot = 'https://www.easy-mock.com/mock/5c259b3ec2518a5416c67c75/candyfl
 // var WxApiRoot = 'https://www.menethil.com.cn/wx/';
 
 module.exports = {
+  GetDrivePoly: TencentRoot + 'driving', //驾车
+  GetWalkPoly: TencentRoot + 'walking', //步行
+  GetBusPoly: TencentRoot + 'transit', //公交
   GetIndexBanner: WxApiRoot + 'index/banner', //首页banner信息
   GetOrderList: WxApiRoot + 'order/orderList', //获取所有order信息————orders
   GetOrderList2: WxApiRoot + 'order/orderList2', //获取所有order信息————orders

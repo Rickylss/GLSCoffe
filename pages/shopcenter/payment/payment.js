@@ -44,14 +44,21 @@ Page({
         height: 50,
         callout: {
           display: 'ALWAYS',
-          fontSize: 16,
+          fontSize: 14,
           borderRadius: 10,
           borderColor: "#000000",
           bgColor: "#ffffff",
-          padding: 10,
+          padding: 5,
           textAlign: 'center',
           content: "",
         },
+      }],
+      include: [{
+        latitude: '',
+        longitude: '',
+      }, {
+        latitude: constant.shopLatitude,
+        longitude: constant.shopLongitude,
       }],
     },
   },
@@ -96,10 +103,15 @@ Page({
           that.setData({
             'mapInfo.latitude': res.latitude,
             'mapInfo.longitude': res.longitude,
+            'mapInfo.include[0].latitude': res.latitude,
+            'mapInfo.include[0].longitude': res.longitude,
           });
           // console.log(that.data.mapInfo);
           var mapCtx = wx.createMapContext(that.data.mapInfo.mapID);
-          mapCtx.moveToLocation();
+          mapCtx.includePoints({
+            points: that.data.mapInfo.include,
+            padding: [20, 20, 20, 20],
+          });
           resolve();
         },
         fail: function (err) {

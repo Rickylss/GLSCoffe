@@ -10,6 +10,7 @@ const shopLatitude = 28.677421959702606;
 const shopLongitude = 115.94422887817383; 
 const shopLocation = shopLatitude +','+ shopLongitude;
 const shopLocationStr = "杭州西湖橄榄山咖啡";
+const shopDescription = "超级棒的咖啡店";
 const defaultScale = 12;
 const mapID = "coffeMap";
 

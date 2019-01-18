@@ -33,7 +33,7 @@ Page({
     leftScrollTop: 0,
     cartInfo: {
       goodsList: [],
-      cost: 0.0,
+      cost: 0.00,
     },
   },
 
@@ -65,11 +65,54 @@ Page({
     goodDic["price"] = goodsInfo.specfoods[0].price;
     goodDic["num"] = 1;
 
+    
+    var cost = parseFloat((this.data.cartInfo.cost * 100 + goodDic["price"] * 100) / 100).toFixed(2);
+
     goodsList.push(goodDic);
     this.setData({
       'cartInfo.goodsList': goodsList,
-      'cartInfo.cost': this.data.cartInfo.cost + goodDic["price"],
+      'cartInfo.cost': cost,
       popUp: false,
+    });
+  },
+
+  /**
+   * 购物车减少
+   */
+  minusNum: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var goodsList = this.data.cartInfo.goodsList;
+    var cost = parseFloat((this.data.cartInfo.cost*100 - goodsList[index].price*100)/100).toFixed(2);
+    goodsList[index].num -= 1;
+
+    if(goodsList[index].num == 0){
+      goodsList.splice(index, 1);
+    }
+    
+    if(goodsList.length==0){
+      this.setData({
+        showCart: false,
+      });
+    }
+
+    this.setData({
+      'cartInfo.goodsList': goodsList,
+      'cartInfo.cost': cost,
+    });
+  },
+
+  /**
+   * 购物车增加
+   */
+  addNum: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var goodsList = this.data.cartInfo.goodsList;
+    var cost = parseFloat((this.data.cartInfo.cost * 100 + goodsList[index].price * 100) / 100).toFixed(2);
+    goodsList[index].num += 1;
+
+    this.setData({
+      'cartInfo.goodsList': goodsList,
+      'cartInfo.cost': cost,
     });
   },
 

@@ -98,7 +98,7 @@ Page({
             'mapInfo.longitude': res.longitude,
           });
           // console.log(that.data.mapInfo);
-          var mapCtx = wx.createMapContext(that.data.mapID);
+          var mapCtx = wx.createMapContext(that.data.mapInfo.mapID);
           mapCtx.moveToLocation();
           resolve();
         },
@@ -133,6 +133,7 @@ Page({
    * 点击自取
    */
   bindTakeself: function () {
+    var that = this;
     if (this.data.switchShowUp) {
       if (!this.data.mapInitReady) {
         this.setData({
@@ -156,6 +157,7 @@ Page({
                 switchShowUp: false,
                 mapInitReady: true,
               });
+              console.log(distanceStr);
             });
           });
         });

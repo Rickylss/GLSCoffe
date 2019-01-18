@@ -57,7 +57,7 @@
       </view>
     </view>
     <view class='popup_cell_cost'>￥10</view>
-    <view class='popup_cell_confirm' bindtap='addToCart'>加入购物车</view>
+    <button class='popup_cell_confirm' bindtap='addToCart'>加入购物车</button>
    </view>
 </view>
 
@@ -83,9 +83,9 @@
           <view class='cartList_float_text_tag'>{{item.tag}}</view>
         </view>
         <view class='cartList_float_price'>￥{{item.price}}</view>
-        <view class='icon iconfont icon-minus2' data-id='{{item.id}}' bindtap='minusNum'/>
+        <view class='icon iconfont icon-minus2' data-index='{{index}}' bindtap='minusNum'/>
         <view class='cartList_float_num'>{{item.num}}</view>
-        <view class='icon iconfont icon-add2' data-id='{{item.id}}' bindtap='addNum'/>
+        <view class='icon iconfont icon-add2' data-index='{{index}}' bindtap='addNum'/>
       </view>
     </scroll-view>  
   </view>
@@ -102,4 +102,3 @@
     </view>
   </view>
 </view>
-

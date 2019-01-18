@@ -311,7 +311,7 @@
   border-radius: 20rpx;
   z-index: 12;
   position: fixed;
-  top: 20%;
+  top: 16%;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -369,11 +369,10 @@
 
 .popup_cell_confirm {
   color: #ffffff;
+  width: 80%;
   text-align: center;
   font-size: 35rpx;
-  margin: 0 auto;
   margin-top: 20rpx;
-  padding: 20rpx 30%;
   background-color: rgb(183, 108, 37);
   border-radius: 10rpx;
 }

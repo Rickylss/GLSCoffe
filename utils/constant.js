@@ -4,11 +4,11 @@
 const tencentAk = 'J6LBZ-EDJKO-VHCWA-SOX3M-GDKP5-PVFP7';
 
 //橄榄山咖啡馆地址
-const shopLatitude = '28.688697871245807';
-const shopLongitude = '115.97130918514567';
+const shopLatitude = '28.68992139487328';
+const shopLongitude = '115.95916341796875';
 const shopLocation = shopLatitude +','+ shopLongitude;
 const shopLocationStr = "杭州西湖橄榄山咖啡";
-const defaultScale = 14;
+const defaultScale = 12;
 const mapID = "coffeMap";
 
 //起送费用

@@ -49,6 +49,24 @@ Page({
     }
   },
 
+  onShow: function() {
+    this.setData({
+      cartInfo: wx.getStorageSync("cartInfo"),
+    });
+  },
+
+  onHide: function () {
+    if (this.data.cartInfo.goodsList.length > 0) {
+      wx.setStorageSync('cartInfo', this.data.cartInfo);
+    }
+  },
+
+  onUnload: function () {
+    if (this.data.cartInfo.goodsList.length > 0) {
+      wx.setStorageSync('cartInfo', this.data.cartInfo);
+    }
+  },
+
   /**
    * 加入购物车
    */

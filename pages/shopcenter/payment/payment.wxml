@@ -49,7 +49,11 @@
         <text class="order_info_more_remark">{{item.tag}}</text>
       </view>
       <text class='number_font_1'>￥{{item.price}}</text>
-      <text class='number_font_2'>x{{item.num}}</text>
+      <view class='number_font_2_cell'>
+        <view class='icon iconfont icon-minus2' data-index='{{index}}' bindtap='minusNum'/>
+        <text class='number_font_2'>{{item.num}}</text>
+        <view class='icon iconfont icon-add2' data-index='{{index}}' bindtap='addNum'/>
+      </view>
     </view>
   </view>
   <view class='cut_line'/>

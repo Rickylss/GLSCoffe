@@ -153,8 +153,12 @@ Page({
    * 显示大地图
    */
   bindShowFullMap: function() {
-    wx.navigateTo({
-      url: '/pages/shopcenter/map/map',
+    wx.openLocation({
+      latitude: constant.shopLatitude,
+      longitude: constant.shopLongitude,
+      scale: constant.defaultScale,
+      name: constant.shopLocationStr,
+      address: constant.shopDescription,
     })
   },
 })

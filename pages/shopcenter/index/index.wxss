@@ -193,7 +193,7 @@
   text-align: center;
   width: 100%;
   color: #ffffff;
-  font-size: 36rpx;
+  font-size: 30rpx;
 }
 
 .act_color {

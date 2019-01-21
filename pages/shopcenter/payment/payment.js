@@ -67,7 +67,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
- 
+
   },
 
   onShow: function() {
@@ -89,6 +89,50 @@ Page({
         })
       });
     }
+  },
+
+  onHide: function() {
+    if (this.data.cartInfo.goodsList.length>0){
+      wx.setStorageSync('cartInfo', this.data.cartInfo);
+    }
+  },
+
+  onUnload: function() {
+    if (this.data.cartInfo.goodsList.length > 0) {
+      wx.setStorageSync('cartInfo', this.data.cartInfo);
+    }
+  },
+
+  /**
+   * 订单减少
+   */
+  minusNum: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var goodsList = this.data.cartInfo.goodsList;
+    var cost = parseFloat((this.data.cartInfo.cost * 100 - goodsList[index].price * 100) / 100).toFixed(2);
+    if(--goodsList[index].num <= 0){
+      goodsList.splice(index, 1);
+    }
+
+    this.setData({
+      'cartInfo.goodsList': goodsList,
+      'cartInfo.cost': cost,
+    });
+  },
+
+  /**
+   * 订单增加
+   */
+  addNum: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var goodsList = this.data.cartInfo.goodsList;
+    var cost = parseFloat((this.data.cartInfo.cost * 100 + goodsList[index].price * 100) / 100).toFixed(2);
+    goodsList[index].num += 1;
+
+    this.setData({
+      'cartInfo.goodsList': goodsList,
+      'cartInfo.cost': cost,
+    });
   },
 
   /** 

@@ -98,7 +98,7 @@
     </view>
     <view class="cart_buy {{cartInfo.cost >= okToSend?'act_color_background':''}}">
       <text class="cart_buy_font" bindtap='pay' wx:if="{{cartInfo.cost >= okToSend}}">去结算</text>
-      <text class="cart_buy_font" wx:else>￥{{okToSend}}起送</text>
+      <text class="cart_buy_font" wx:else>还差￥{{okToSend - cartInfo.cost}}起送</text>
     </view>
   </view>
 </view>

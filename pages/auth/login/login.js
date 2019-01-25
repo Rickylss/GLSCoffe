@@ -30,6 +30,10 @@ Page({
     }
     user.checkLogin().then(() => {
       console.log("用户已登陆");
+      app.globalData.hasLogin = true;
+      wx.navigateBack({
+        delta: 1
+      });
     }).catch(() => {
       
       user.loginByWeixin(e.detail.userInfo).then(res => {

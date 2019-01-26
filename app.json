@@ -1,16 +1,14 @@
 {
   "pages":[  
-
     "pages/index/index",
     "pages/shopcenter/map/map",
     "pages/shopcenter/payment/payment",
     "pages/shopcenter/index/index",
-
+    
+    "pages/auth/login/login",
     "pages/auth/accountLogin/accountLogin",
     "pages/auth/register/register",
     "pages/auth/reset/reset",
-    "pages/auth/login/login",
-
     "pages/ordercenter/order/order",
     "pages/ordercenter/index/index",
 

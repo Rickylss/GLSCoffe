@@ -5,16 +5,16 @@
 <view class='address_add icon iconfont icon-add' bindtap='addAddress'/>
 <view style='font-size：35rpx; font-weight: 600; text-align: center; color: rgb(183, 108, 37);' wx:if="{{addressList.length==0}}">点击加号添加地址<icon class="icon iconfont icon-tianjia"/></view>
 <view class='address_all' wx:else>
-  <block wx:for="{{addressList}}" wx:key="addressId">
+  <block wx:for="{{addressList}}" wx:key="id">
     <view class='address_cell'>
       <view  data-index="{{index}}" bindtap="choseAddress">
         <view class="address_info_address">
-          <text class='address_default' wx:if='{{item.default}}'>默认</text>
+          <text class='address_default' wx:if='{{item.isDefault}}'>默认</text>
         {{item.address}}
         </view>
-        <text class='address_info_cell' space='emsp'>{{item.costomerName}} {{item.gender?'先生':'女士'}}  {{item.phoneNumber}}</text>
+        <text class='address_info_cell' space='emsp'>{{item.name}} {{item.gender?'先生':'女士'}}  {{item.mobile}}</text>
       </view>
-      <view class='address_update icon iconfont icon-change' data-addressid='{{item.addressId}}' bindtap='updateAddress'/>
+      <view class='address_update icon iconfont icon-change' data-addressid='{{item.id}}' bindtap='updateAddress'/>
     </view>
   </block>
 </view>

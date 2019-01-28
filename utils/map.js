@@ -121,8 +121,57 @@ function regeocodingAddress(localAddress) {
   });
 }
 
+/**
+ * 地址解析
+ */
+function geocoder(address){
+  return new Promise(function(resolve, reject){
+    qqmapsdk.geocoder({
+      address: address,
+      success: function(res) {
+        var localAddress = {};
+        localAddress['latitude'] = res.result.location.lat;
+        localAddress['longitude'] = res.result.location.lng;
+        resolve(localAddress);
+      },
+      fail: function(err){
+        reject(err);
+      }
+    });
+  });
+}
+
+/**
+ * 行政区域划分
+ */
+function getRegionId(addressRegion){
+  return new Promise(function (resolve, reject){
+    qqmapsdk.getCityList({
+      success: function(res){
+        var regionId = [];
+
+        for(var j=0; j<3; j++){
+          for (var i = 0; i < res.result[j].length; i++) {
+            if (addressRegion[j] == res.result[j][i].fullname) {
+              regionId[j] = res.result[j][i].id;
+              break;
+            }
+          }
+        }
+
+        resolve(regionId);
+      },
+      fail: function(err){
+        reject(err);
+      }
+    })
+  });
+}
+
 module.exports = {
   scopeSetting,
   calculateDistance,
   regeocodingAddress,
+  geocoder,
+  //getRegionId,
 };

@@ -1,7 +1,7 @@
 <!--pages/ucenter/address/setAddress/setAddress.wxml-->
 <include src="../../../loading/loading.wxml"/>
 
-<view class='address_minus icon iconfont icon-minus'  wx:if="{{!isAdd}}" bindtap='deleteAddress'/>
+<view class='address_minus icon iconfont icon-minus'  wx:if="{{address.id>0}}" bindtap='deleteAddress'/>
 <view class='address_addfrom_wx' wx:else bindtap='addAddressFromWX'>
 从微信地址添加
 </view>
@@ -10,8 +10,8 @@
 
   <view class='setaddress_location_cell'>
     <text class='setaddress_text'>地址:</text>
-    <view class='setaddress_input_width setaddress_input' >{{addressInfo.region[0]}}{{addressInfo.region[1]}}{{addressInfo.region[2]}}</view>
-    <picker style='color: red;' mode="region" bindchange='bindRegionChange' value='{{addressInfo.region}}'>
+    <view class='setaddress_input_width setaddress_input' >{{address.region[0]}} {{address.region[1]}} {{address.region[2]}}</view>
+    <picker style='color: red;' mode="region" bindchange='bindRegionChange' value='{{address.region}}'>
         <view class="icon iconfont icon-more" />
     </picker>
 
@@ -21,35 +21,35 @@
 
   <view class='setaddress_location_cell'>
     <text class='setaddress_text'>门牌号:</text>
-    <input class='setaddress_input_width setaddress_input' value='{{addressInfo.address}}' bindinput='bindAddressInput' placeholder-class='setaddress_placeholder_input' placeholder='详细地址，例：15号楼3层302室'></input>
+    <input class='setaddress_input_width setaddress_input' value='{{address.address}}' bindinput='bindAddressInput' placeholder-class='setaddress_placeholder_input' placeholder='详细地址，例：15号楼3层302室'></input>
   </view>
 
   <view class="cutline"/>
 
   <view class='setaddress_location_cell'>
     <view class='setaddress_text'>联系人:</view>
-    <input class='setaddress_input_width setaddress_input' maxlength="6" value='{{addressInfo.costomerName}}' bindinput='bindCostomerNameInput' placeholder-class='setaddress_placeholder_input' placeholder='请填写收货人姓名'></input>
+    <input class='setaddress_input_width setaddress_input' value='{{address.name}}' bindinput='bindCostomerNameInput' placeholder-class='setaddress_placeholder_input' placeholder='请填写收货人姓名'></input>
   </view>
 
   <view class="cutline_short"/>
 
   <radio-group class='setaddress_costomer_radio' bindchange="radioChange">
-    <radio class="radio" value='1' checked='{{addressInfo.gender}}' color='#B76C25'>先生</radio>
-    <radio class="radio" value='0' checked='{{!addressInfo.gender}}' color='#B76C25'>女士</radio>
+    <radio class="radio" value='1' checked="{{address.gender}}" color='#B76C25'>先生</radio>
+    <radio class="radio" value='0' checked="{{!address.gender}}" color='#B76C25'>女士</radio>
   </radio-group>
 
   <view class="cutline"/>
 
   <view class='setaddress_location_cell'>
     <text class='setaddress_text' >手机号:</text>
-    <input class='setaddress_input_width setaddress_input' maxlength="11" value='{{addressInfo.phoneNumber}}' bindinput='bindPhoneNumberInput' placeholder-class='setaddress_placeholder_input' placeholder='请填写收货人手机号码'></input>
+    <input class='setaddress_input_width setaddress_input' maxlength="12" value='{{address.mobile}}' bindinput='bindPhoneNumberInput' placeholder-class='setaddress_placeholder_input' placeholder='请填写收货人手机号码'></input>
   </view>
 
   <view class="cutline"/>
   
   <view class='setaddress_location_cell'>
     <view style='width: 35%;font-size: 30rpx;'>设为默认地址：</view>
-    <switch  class="radio" checked="{{addressInfo.default}}" bindchange='defaultChange' ></switch>
+    <switch  class="radio" checked="{{address.isDefault}}" bindchange='defaultChange' ></switch>
   </view>
 
 </view>

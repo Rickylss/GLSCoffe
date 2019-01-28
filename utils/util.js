@@ -27,7 +27,7 @@ function request(url, data={}, method="GET") {
       method: method,
       header: {
         'Content-Type': 'application/json',
-        'X-candyfloss-Token': wx.getStorageSync('token')
+        'X-Glscoffe-Token': wx.getStorageSync('token')
       },
       success: function(res) {
         if (res.statusCode == 200) {

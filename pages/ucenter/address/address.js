@@ -31,16 +31,17 @@ Page({
   onShow: function () {
     var that = this;
     if(app.globalData.hasLogin) {
-      util.request(api.GetAddressListById,{
-        userId: 1,
-      },"POST").then((res)=>{
-        if(res) {
+      util.request(api.GetAddressList,{},
+      "GET").then((res)=>{
+        if(res.errno == 0 && res.data) {
           that.setData({
-            addressList: res.result,
-            'loading.loadingShow': false,
-            'loading.loadingError': false,
+            addressList: res.data,
           });
         }
+        that.setData({
+          'loading.loadingShow': false,
+          'loading.loadingError': false,
+        });
       }).catch((err)=> {
         that.setData({
           'loading.loadingShow': false,
@@ -65,7 +66,7 @@ Page({
     //type 0 为添加地址
     var type = 0;
     wx.navigateTo({
-      url: "/pages/ucenter/address/setAddress/setAddress?type="+type,
+      url: "/pages/ucenter/address/setAddress/setAddress",
     })
   },
 
@@ -78,7 +79,7 @@ Page({
     var type = 1;
     if(id) {
       wx.navigateTo({
-        url: '/pages/ucenter/address/setAddress/setAddress?type='+type+'&id='+id,
+        url: '/pages/ucenter/address/setAddress/setAddress?id='+id,
       })
     }
   },

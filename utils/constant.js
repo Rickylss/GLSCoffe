@@ -14,6 +14,9 @@ const shopDescription = "超级棒的咖啡店";
 const defaultScale = 12;
 const mapID = "coffeMap";
 
+//配送距离
+const areaRadius = 1000;
+
 //起送费用
 const okToSend = 20;
 
@@ -30,4 +33,5 @@ module.exports = {
   mapID,
   okToSend,
   promotionInfo,
+  areaRadius,
 }

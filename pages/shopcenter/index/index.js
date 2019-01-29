@@ -51,7 +51,7 @@ Page({
   },
 
   onShow: function() {
-    if(this.data.cartInfo){
+    if (wx.getStorageSync("cartInfo")){
       this.setData({
         cartInfo: wx.getStorageSync("cartInfo"),
       });
@@ -68,7 +68,7 @@ Page({
   },
 
   onUnload: function () {
-    if (this.data.cartInfo && this.data.cartInfo.goodsList.length > 0) {
+    if (this.data.cartInfo) {
       wx.setStorageSync('cartInfo', this.data.cartInfo);
     }
   },

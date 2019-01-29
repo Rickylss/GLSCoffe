@@ -19,6 +19,7 @@ module.exports = {
   GetAddressById: WxApiRoot + 'address/detail', //根据addressId获取Address信息--ucenter/address/setaddress
   DeleteAddressById: WxApiRoot + 'address/delete', //根据addressId删除Address信息--ucenter/address/setaddress
   SaveAddress: WxApiRoot + 'address/save', // 更新或添加Address信息--ucenter/address/setaddress
+  GetDefaultAddressByUId: WxApiRoot + 'address/default', //根据userId获取默认地址--shopcenter/payment
 
   GetDrivePoly: TencentRoot + 'driving', //驾车
   GetWalkPoly: TencentRoot + 'walking', //步行
@@ -31,7 +32,7 @@ module.exports = {
   GetCouponListById: WxApiRoot + 'coupon/list', //根据userId获取couponList--ucenter/coupon
   GetUsedCouponByID: MockRoot + 'coupon/getUsedcouponById', //根据couponId获取coupon--ordercenter/order
 
-  GetDefaultAddressByUId: MockRoot + 'address/getDefaultAddressByUId', //根据userId获取默认地址--shopcenter/payment
+
 
   GetList: 'https://www.easy-mock.com/mock/59abab95e0dc66334199cc5f/coco/aa', //获取商品信息
 };

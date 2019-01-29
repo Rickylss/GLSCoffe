@@ -63,8 +63,6 @@ Page({
    * 添加地址
    */
   addAddress: function() {
-    //type 0 为添加地址
-    var type = 0;
     wx.navigateTo({
       url: "/pages/ucenter/address/setAddress/setAddress",
     })
@@ -74,9 +72,7 @@ Page({
    * 更新地址信息
    */
   updateAddress: function(e) {
-    //type 1 为更新地址
     var id = e.currentTarget.dataset.addressid;
-    var type = 1;
     if(id) {
       wx.navigateTo({
         url: '/pages/ucenter/address/setAddress/setAddress?id='+id,

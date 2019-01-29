@@ -15,7 +15,7 @@
     <view class="address" bindtap='choseAddress'>
       <view class="chosed_address" wx:if="{{chosedAddress.address}}">
         <view style='font-size: 35rpx; font-weight: 550; margin-top: 15rpx;'>{{chosedAddress.address}}</view>
-        <text style='font-size: 30rpx; margin-top: 15rpx; opacity: 0.7;' space='emsp'>{{chosedAddress.costomerName}} {{chosedAddress.gender?'先生':'女士'}}  {{chosedAddress.phoneNumber}}</text>
+        <text style='font-size: 30rpx; margin-top: 15rpx; opacity: 0.7;' space='emsp'>{{chosedAddress.name}} {{chosedAddress.gender?'先生':'女士'}}  {{chosedAddress.mobile}}</text>
       </view>
       <view class='address_chose' wx:else>选择收货地址</view>
       <view class='icon iconfont icon-chose-address'/>

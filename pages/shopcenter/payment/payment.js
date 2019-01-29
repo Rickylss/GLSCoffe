@@ -4,6 +4,7 @@ var constant = require("../../../utils/constant.js");
 var util = require("../../../utils/util.js")
 var map = require("../../../utils/map.js")
 var app = getApp();
+var gotAddress = false;
 
 Page({
 
@@ -67,21 +68,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  onShow: function() {
     var that = this;
     if (app.globalData.hasLogin) {
-      util.request(api.GetDefaultAddressByUId, {
-
-      }, "POST").then((res) => {
-        that.setData({
-          cartInfo: wx.getStorageSync("cartInfo"),
-          chosedAddress: res,
-        });
-      });
+      this.getAddress();
+      gotAddress = true;
     } else {
+      gotAddress = false;
       util.toUserLogin().catch((err) => {
         console.log(err);
         wx.navigateBack({
@@ -91,6 +83,20 @@ Page({
     }
   },
 
+  onShow: function() {
+    if (!gotAddress && app.globalData.hasLogin){
+      this.getAddress();
+      gotAddress = true;
+    }else{
+      this.setData({
+        chosedAddress: wx.getStorageSync("defaultAddress"),
+      })
+    }
+    this.setData({
+      cartInfo: wx.getStorageSync("cartInfo"),
+    });
+  },
+
   onHide: function() {
     if (this.data.cartInfo.goodsList.length>0){
       wx.setStorageSync('cartInfo', this.data.cartInfo);
@@ -98,9 +104,19 @@ Page({
   },
 
   onUnload: function() {
-    if (this.data.cartInfo.goodsList.length > 0) {
+    if (this.data.cartInfo) {
       wx.setStorageSync('cartInfo', this.data.cartInfo);
     }
+  },
+
+  getAddress: function() {
+    var that = this;
+    util.request(api.GetDefaultAddressByUId, {},
+      "GET").then((res) => {
+        that.setData({
+          chosedAddress: res.data,
+        });
+      });
   },
 
   /**
@@ -195,11 +211,11 @@ Page({
   bindTakeself: function () {
     var that = this;
     if (this.data.switchShowUp) {
+      this.setData({
+        switchShowUp: false,
+        mapInitReady: true,
+      });
       if (!this.data.mapInitReady) {
-        this.setData({
-          switchShowUp: false,
-          mapInitReady: true,
-        });
         map.scopeSetting().then(() => {
           this.initMap().then(()=>{
             var localAddress = {
@@ -229,6 +245,7 @@ Page({
    * 调用微信支付
    */
   pay: function (res) {
+    //检查起送
     console.log("pay");
   },
 

@@ -51,15 +51,20 @@ Page({
   },
 
   onShow: function() {
-    this.setData({
-      cartInfo: wx.getStorageSync("cartInfo"),
-    });
+    if(this.data.cartInfo){
+      this.setData({
+        cartInfo: wx.getStorageSync("cartInfo"),
+      });
+    }
   },
 
   onHide: function () {
     if (this.data.cartInfo.goodsList.length > 0) {
       wx.setStorageSync('cartInfo', this.data.cartInfo);
     }
+    this.setData({
+      showCart: false,
+    });
   },
 
   onUnload: function () {

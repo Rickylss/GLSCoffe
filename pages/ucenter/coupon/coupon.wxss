@@ -2,6 +2,15 @@
 @import "../../../styles/iconfont.wxss";
 @import "../../loading/loading.wxss";
 
+.no_coupon {
+  width: 85%;
+  margin: 10% auto;
+  border: 1rpx solid #ffffff;
+  border-radius: 30rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rpx #888888;
+}
+
 .coupon_cells{
   width: 90%;
   display: flex;

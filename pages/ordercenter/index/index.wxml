@@ -1,6 +1,6 @@
 <!--pages/orders/orders.wxml-->
 <include src="../../loading/loading.wxml"/>
-<!-- 无订单信息 -->
+
 <block wx:if="{{orderList.length>0}}">
   <view class="orders">
     <block  wx:for="{{orderList}}" wx:key="orderId">

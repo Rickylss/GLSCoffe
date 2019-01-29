@@ -28,8 +28,9 @@ module.exports = {
   GetOrderList2: MockRoot + 'order/orderList2', //获取所有order信息————orders
   GetOrderById: MockRoot + 'order/getOrderById', //根据用户id获取Order信息
 
-  GetCouponListById: MockRoot + 'coupon/getcouponListById', //根据userId获取couponList--ucenter/coupon
+  GetCouponListById: WxApiRoot + 'coupon/list', //根据userId获取couponList--ucenter/coupon
   GetUsedCouponByID: MockRoot + 'coupon/getUsedcouponById', //根据couponId获取coupon--ordercenter/order
+
   GetDefaultAddressByUId: MockRoot + 'address/getDefaultAddressByUId', //根据userId获取默认地址--shopcenter/payment
 
   GetList: 'https://www.easy-mock.com/mock/59abab95e0dc66334199cc5f/coco/aa', //获取商品信息

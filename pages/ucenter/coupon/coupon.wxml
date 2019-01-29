@@ -1,22 +1,31 @@
 <!--pages/ucenter/coupon/coupon.wxml-->
 <include src="../../loading/loading.wxml"/>
 
-<view class="coupon_cells  {{item.timeTag==0?'coupon_invalid':''}}" data-index='{{index}}' wx:for="{{couponList}}" wx:key="id">
-  <view class="coupon_cell">
-    <view class='coupon_cell_info' >
-      <view class='coupon_cell_left' >
-        <view style='font-size: 35rpx; color: #33dd8e;' >￥<text style='font-size: 55rpx;'>{{item.shortCut}}</text> </view>
-        <view style='font-size: 30rpx; color: #33dd8e;' >优惠券</view>
-      </view>
-      <view class='coupon_cell_right'>
-        <view class='coupon_cell_right_category'>适用分类：{{item.category}}</view>
-        <view class="coupon_cell_right_time {{item.timeTag < 2?'red':''}}" >{{item.timeBefore}}</view>
-        <view class='coupon_cell_right_rule' data-index='{{index}}' bindtap='showRules' >使用规则<icon class="icon iconfont {{ruleTaped[index]?'icon-up':'icon-down'}}"/></view>
-      </view>
-    </view>
-    <view class="coupon_cell_use" wx:if="{{item.timeTag!=0}}" data-categoryid='{{item.categoryId}}' bindtap='tapUse'>立即使用</view>
-  </view>
-  <view class="coupon_cell_rules {{ruleTaped[index]?'':'hid_rules'}}">
-    <view class="coupon_cell_rules_info">{{item.rules}}</view>
+<view class='no_coupon' wx:if="{{!hasCoupon}}">
+  <view style='text-align: center; width: 100%; padding: 30% 0;'>
+    <text>无可用优惠券</text>
   </view>
 </view>
+<block wx:else>
+  <view class="coupon_cells  {{item.timeTag==0?'coupon_invalid':''}}" data-index='{{index}}' wx:for="{{couponList}}" wx:key="id">
+    <view class="coupon_cell">
+      <view class='coupon_cell_info' >
+        <view class='coupon_cell_left' >
+          <view style='font-size: 35rpx; color: #33dd8e;' >￥<text style='font-size: 55rpx;'>{{item.shortCut}}</text> </view>
+          <view style='font-size: 30rpx; color: #33dd8e;' >优惠券</view>
+        </view>
+        <view class='coupon_cell_right'>
+          <view class='coupon_cell_right_category'>适用分类：{{item.category}}</view>
+          <view class="coupon_cell_right_time {{item.timeTag < 2?'red':''}}" >{{item.timeBefore}}</view>
+          <view class='coupon_cell_right_rule' data-index='{{index}}' bindtap='showRules' >使用规则<icon class="icon iconfont {{ruleTaped[index]? 'icon-up':'icon-down'}}"/></view>
+        </view>
+      </view>
+      <view class="coupon_cell_use" wx:if="{{item.timeTag!=0}}" data-categoryid='{{item.categoryId}}' bindtap='tapUse'>立即使用</view>
+    </view>
+    <view class="coupon_cell_rules {{ruleTaped[index]?'':'hid_rules'}}">
+      <view class="coupon_cell_rules_info">{{item.rules}}</view>
+    </view>
+  </view>
+</block>
+
+

@@ -24,25 +24,31 @@ Page({
   onShow: function () {
     var that = this;
     if (app.globalData.hasLogin) {
-      util.request(api.GetCouponListById, {
-        userId: 1,
-      }, "POST").then((res) => {
-        res.rest.forEach(function(e){
-          var date = new Date(e["timeBefore"]).setHours(0, 0, 0, 0);
-          if(date < toDay){
-            e["timeBefore"] = "已失效";
-            e["timeTag"] = 0;
-          }else if(date == toDay){
-            e["timeBefore"] = "今日到期";
-            e["timeTag"] = 1;
-          }else{
-            e["timeBefore"] = "有效期至：" + e["timeBefore"];
-            e["timeTag"] = 2;
-          }
-        });
-        if (res.rest) {
+      util.request(api.GetCouponListById, {}, "GET").then((res) => {
+        if(res.data){
+          res.data.forEach(function (e) {
+            var localDate = new Date(e["timeBefore"]);
+            var date = localDate.setHours(0, 0, 0, 0);
+            if (date < toDay) {
+              e["timeBefore"] = "已失效";
+              e["timeTag"] = 0;
+            } else if (date == toDay) {
+              e["timeBefore"] = "今日到期";
+              e["timeTag"] = 1;
+            } else {
+              e["timeBefore"] = "有效期至：" + localDate.toLocaleDateString();
+              e["timeTag"] = 2;
+            }
+          });
           that.setData({
-            couponList: res.rest,
+            hasCoupon: true,
+            couponList: res.data,
+            'loading.loadingShow': false,
+            'loading.loadingError': false,
+          });
+        }else{ //无优惠券
+          that.setData({
+            hasCoupon: false,
             'loading.loadingShow': false,
             'loading.loadingError': false,
           });

@@ -43,10 +43,11 @@ Page({
   onLoad: function(options) {
     var that = this;
     this.setHeight();
-    this.getListData();
-    if (options.categoryid >= 0) {
-      this.jumpToCategory(options.categoryid);
-    }
+    this.getListData().then(()=>{
+      if(options.categoryid){
+        this.jumpToCategory(options.categoryid);
+      }
+    });
   },
 
   onShow: function() {
@@ -62,7 +63,7 @@ Page({
   },
 
   onUnload: function () {
-    if (this.data.cartInfo.goodsList.length > 0) {
+    if (this.data.cartInfo && this.data.cartInfo.goodsList.length > 0) {
       wx.setStorageSync('cartInfo', this.data.cartInfo);
     }
   },
@@ -298,9 +299,16 @@ Page({
    * 跳转至对应类别
    */
   jumpToCategory: function(categoryid) {
-    this.setData({
-      activeIndex: categoryid,
-    });
+    var listData = this.data.listData;
+    for (var i = 0; i < listData.length; i++) {
+      if (listData[i].id == categoryid) {
+        that.setData({
+          activeIndex: categoryid,
+          toView: 'a' + i,
+        });
+        break;
+      }
+    }
   },
 
   /**
@@ -363,21 +371,24 @@ Page({
    */
   getListData: function() {
     var that = this;
-    util.request(api.GetList, {}, "GET").then((res) => {
-      res.forEach(function(e) {
-        e['num'] = 0;
-      });
-      that.setData({
-        listData: res,
-        'loading.loadingShow': false,
-        'loading.loadingError': false,
-      });
-      that.getSpace();
-    }).catch((err) => {
-      console.log('load failed');
-      that.setData({
-        'loading.loadingShow': false,
-        'loading.loadingError': true,
+    return new Promise(function(resovle, reject){
+      util.request(api.GetList, {}, "GET").then((res) => {
+        res.forEach(function (e) {
+          e['num'] = 0;
+        });
+        that.setData({
+          listData: res,
+          'loading.loadingShow': false,
+          'loading.loadingError': false,
+        });
+        that.getSpace();
+        resovle();
+      }).catch((err) => {
+        reject('load failed');
+        that.setData({
+          'loading.loadingShow': false,
+          'loading.loadingError': true,
+        });
       });
     });
   },

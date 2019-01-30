@@ -7,7 +7,7 @@
 <view class="list" style='height: {{listHeight}}px;'>
   <!-- 左侧菜单 -->
   <scroll-view class="list_left_menu" scroll-y="true" scroll-top="{{leftScrollTop}}" bindscroll="scrollLeftMenu" scroll-with-animation="true">
-    <view class='listMenuHeight' wx:for="{{listData}}" wx:key="unique" data-index='{{index}}' bindtap='selectMenu'>
+    <view class='listMenuHeight' wx:for="{{listData}}" wx:key="categoryId" data-index='{{index}}' bindtap='selectMenu'>
       <view class="list_menu_cell {{index==activeIndex?'list-left-menu-box-selected':''}}">
         <view class="list_menu_name">
           <view style='text-align: center; margin: 0 auto; font-size: 30rpx;' >{{item.name}}</view>
@@ -21,17 +21,17 @@
       <view class='list_tab'>
         <view class='list_tab_text'>{{item.name}}</view>
       </view>
-      <view class='content-list' wx:for="{{item.foods}}" wx:key="unique" wx:for-item="items" wx:for-index="indexs">
+      <view class='content-list' wx:for="{{item.goodsList}}" wx:key="id" wx:for-item="items" wx:for-index="indexs">
         <view class='list-image-box'>
-          <image class="list-image" src='{{items.image_url}}'></image>
+          <image class="list-image" src='{{items.picUrl}}'></image>
         </view>
         <view class='issue-name'>
           <view style='font-size: 35rpx;' >{{items.name}}</view>
           <view class='issue-cell'>
-            <view style='font-size: 30rpx;margin-top:20rpx;color:#F05A86'>¥{{items.specfoods[0].price}}</view>
-            <view style='margin-top:20rpx;'>
-                <icon class='icon iconfont icon-minus2' data-id='{{item.id}}' bindtap='minusNum' hidden='{{item.num<=0}}'/>
-                <text style='font-size: 30rpx' hidden='{{item.num<=0}}'>{{item.num}}</text>
+            <view style='font-size: 30rpx;margin-top:20rpx;color:#F05A86'>¥{{items.price}}</view>
+            <view class='issue-num'>
+                <icon class='icon iconfont icon-minus2' data-id='{{item.id}}' bindtap='toasUp' hidden='{{items.num<=0}}'/>
+                <text style='font-size: 35rpx' hidden='{{items.num<=0}}'>{{items.num}}</text>
                 <icon class='icon iconfont icon-add2' data-id='{{item.id}}' data-type="{{index}}" data-index="{{indexs}}" bindtap="selectInfo"/>
             </view>
           </view>
@@ -56,9 +56,18 @@
         </view>
       </view>
     </view>
-    <view class='popup_cell_cost'>￥10</view>
+    <!-- <view class='popup_cell_cost'>￥10</view> -->
     <button class='popup_cell_confirm' bindtap='addToCart'>加入购物车</button>
    </view>
+</view>
+
+<view hidden="{{!toastUp}}" catchtouchmove='move'>
+  <view class='mask' style='z-index: 11;' catchtouchmove='move'/>
+  <view class='toastup_cell'>
+    <text style='font-size: 35rpx; color: rgb(183, 108, 37); font-weight: 550'>提示</text>
+    <text style='font-size: 30rpx; '>饮品含有多种规格，请在购物车中删除</text>
+    <view class='toastup_cell_button' bindtap='toastDown'>我 知 道 了</view>
+  </view>
 </view>
 
 <!-- 购物车 -->

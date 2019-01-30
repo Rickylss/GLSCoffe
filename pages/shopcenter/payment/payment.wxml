@@ -56,6 +56,9 @@
       </view>
     </view>
   </view>
+  <!-- 选择优惠券 -->
+  <view class='chosed_coupon'>选择优惠券</view>
+  
   <view class='cut_line'/>
   <view class='remark_cell'>
     <textarea class="remarks" value="{{remarks}}" maxlength="30" bindinput='bindRemarksInput' auto-height="true" placeholder="{{remarkPlaceholder}}" placeholder-class='place_holder' />

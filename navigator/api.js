@@ -15,6 +15,8 @@ var WxApiRoot = 'http://localhost:8080/wx/';
 module.exports = {
   AuthLoginByWeixin: WxApiRoot + 'auth/login_by_wx', //微信登陆
 
+  GetList: WxApiRoot + 'goods/list', //获取商品信息
+
   GetAddressList: WxApiRoot + 'address/list', //获取AddressList信息--ucenter/address
   GetAddressById: WxApiRoot + 'address/detail', //根据addressId获取Address信息--ucenter/address/setaddress
   DeleteAddressById: WxApiRoot + 'address/delete', //根据addressId删除Address信息--ucenter/address/setaddress
@@ -34,5 +36,5 @@ module.exports = {
 
 
 
-  GetList: 'https://www.easy-mock.com/mock/59abab95e0dc66334199cc5f/coco/aa', //获取商品信息
+
 };

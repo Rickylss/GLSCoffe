@@ -2,6 +2,7 @@
 var util = require("../../../utils/util.js")
 var constant = require("../../../utils/constant.js")
 var api = require('../../../navigator/api.js')
+var loaded = false;
 
 Page({
 
@@ -13,6 +14,7 @@ Page({
     promotionInfo: constant.promotionInfo,
     showCart: false,
     popUp: false,
+    toastUp: false,
     listHeight: 0,
     loading: {
       loadingShow: true,
@@ -47,13 +49,40 @@ Page({
       if(options.categoryid){
         this.jumpToCategory(options.categoryid);
       }
+      if (this.data.cartInfo) {
+        var cartInfo = { goodsList: [], cost: 0.00, };
+        wx.setStorageSync('cartInfo', cartInfo);
+      }
+      loaded = true;
     });
   },
 
   onShow: function() {
-    if (wx.getStorageSync("cartInfo")){
+    var cartInfo = wx.getStorageSync("cartInfo");
+    if (!cartInfo) {
+      cartInfo = {goodsList: [], cost: 0.00,};
+    }
+    this.setData({
+      cartInfo: cartInfo,
+    });
+
+    if(loaded){
+      var listData = this.data.listData;
+      listData.forEach(function (e) {
+        e.goodsList.forEach(function (ee) {
+          ee.num = 0;
+        })
+      })
+
+      if (cartInfo) {
+        var goodsList = cartInfo.goodsList;
+        goodsList.forEach(function (e) {
+          listData[e.currentType].goodsList[e.currentGoods].num = e.num;
+        });
+      }
+
       this.setData({
-        cartInfo: wx.getStorageSync("cartInfo"),
+        listData: listData,
       });
     }
   },
@@ -68,9 +97,7 @@ Page({
   },
 
   onUnload: function () {
-    if (this.data.cartInfo) {
-      wx.setStorageSync('cartInfo', this.data.cartInfo);
-    }
+    loaded = false;
   },
 
   /**
@@ -79,14 +106,18 @@ Page({
   addToCart: function(e) {
     var merge = false;
     var goodDic = {};
+    var currentType = this.data.currentType;
+    var currentGoods = this.data.currentGoods;
+    var listData = this.data.listData;
+    listData[currentType].goodsList[currentGoods].num += 1;
     var goodsInfo = this.data.goodsInfo;
-    var cost = parseFloat((this.data.cartInfo.cost * 100 + goodsInfo.specfoods[0].price * 100) / 100).toFixed(2);
+    var cost = parseFloat((this.data.cartInfo.cost * 100 + goodsInfo.price * 100) / 100).toFixed(2);
     var goodsList = this.data.cartInfo.goodsList;
     var itemList = this.data.itemList;
     var tag = itemList.join("+");
 
     for(var count=0; goodsList.length > count; count++){
-      if (goodsList[count].id == goodsInfo.item_id && goodsList[count].tag == tag){
+      if (goodsList[count].id == goodsInfo.id && goodsList[count].tag == tag){
         goodsList[count].num += 1;
         merge = true;
         break;
@@ -95,14 +126,19 @@ Page({
 
     if(!merge){
       goodDic["tag"] = tag;
-      goodDic["id"] = goodsInfo.item_id;
+      goodDic["id"] = goodsInfo.id;
       goodDic["name"] = goodsInfo.name;
-      goodDic["price"] = goodsInfo.specfoods[0].price;
+      goodDic["price"] = goodsInfo.price;
       goodDic["num"] = 1;
+      goodDic["currentType"] = currentType;
+      goodDic["currentGoods"] = currentGoods;
       goodsList.push(goodDic);
     }
 
+
+
     this.setData({
+      listData: listData,
       'cartInfo.goodsList': goodsList,
       'cartInfo.cost': cost,
       popUp: false,
@@ -115,6 +151,12 @@ Page({
   minusNum: function(e) {
     var index = e.currentTarget.dataset.index;
     var goodsList = this.data.cartInfo.goodsList;
+
+    var currentType = goodsList[index].currentType;
+    var currentGoods = goodsList[index].currentGoods;
+    var listData = this.data.listData;
+    listData[currentType].goodsList[currentGoods].num -= 1;
+
     var cost = parseFloat((this.data.cartInfo.cost * 100 - goodsList[index].price * 100) / 100).toFixed(2);
     goodsList[index].num -= 1;
 
@@ -129,6 +171,7 @@ Page({
     }
 
     this.setData({
+      listData: listData,
       'cartInfo.goodsList': goodsList,
       'cartInfo.cost': cost,
     });
@@ -140,10 +183,17 @@ Page({
   addNum: function(e) {
     var index = e.currentTarget.dataset.index;
     var goodsList = this.data.cartInfo.goodsList;
+
+    var currentType = goodsList[index].currentType;
+    var currentGoods = goodsList[index].currentGoods;
+    var listData = this.data.listData;
+    listData[currentType].goodsList[currentGoods].num += 1;
+
     var cost = parseFloat((this.data.cartInfo.cost * 100 + goodsList[index].price * 100) / 100).toFixed(2);
     goodsList[index].num += 1;
 
     this.setData({
+      listData: listData,
       'cartInfo.goodsList': goodsList,
       'cartInfo.cost': cost,
     });
@@ -173,7 +223,7 @@ Page({
     var itemListDef = [];
     var currentType = e.currentTarget.dataset.type;
     var currentGoods = e.currentTarget.dataset.index;
-    var goodsInfo = this.data.listData[currentType].foods[currentGoods];
+    var goodsInfo = this.data.listData[currentType].goodsList[currentGoods];
 
     goodsInfo.attrs.forEach(function(e) {
       itemListDef.push(e.values[0]);
@@ -181,6 +231,8 @@ Page({
 
     that.setData({
       popUp: true,
+      currentType: currentType,
+      currentGoods: currentGoods,
       goodsInfo: goodsInfo,
       itemList: itemListDef,
       activePopIndexList: [0, 0, 0, 0],
@@ -378,11 +430,8 @@ Page({
     var that = this;
     return new Promise(function(resovle, reject){
       util.request(api.GetList, {}, "GET").then((res) => {
-        res.forEach(function (e) {
-          e['num'] = 0;
-        });
         that.setData({
-          listData: res,
+          listData: res.data,
           'loading.loadingShow': false,
           'loading.loadingError': false,
         });
@@ -407,6 +456,26 @@ Page({
       wx.navigateTo({
         url: '/pages/shopcenter/payment/payment',
       })
+    }
+  },
+
+  /**
+   * 弹出提示
+   */
+  toasUp: function(){
+    if(!this.data.toastUp){
+      this.setData({
+        toastUp: true,
+      });
+    }
+  },
+
+  toastDown: function(){
+    if (this.data.toastUp) {
+      this.setData({
+        toastUp: false,
+        showCart: true,
+      });
     }
   },
 

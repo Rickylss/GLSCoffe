@@ -125,6 +125,14 @@
   align-items: center;
 }
 
+.issue-num {
+  margin-top:20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .foot {
   width: 100%;
   display: flex;
@@ -311,7 +319,7 @@
   border-radius: 20rpx;
   z-index: 12;
   position: fixed;
-  top: 16%;
+  top: 14%;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -335,7 +343,7 @@
 }
 
 .popup_cell_name {
-  font-size: 35rpx;
+  font-size: 30rpx;
   opacity: 0.5;
   margin-top: 20rpx;
 }
@@ -348,12 +356,12 @@
 }
 
 .popup_cell_info_cell {
-  margin-top: 20rpx;
-  font-size: 30rpx;
+  margin-top: 10rpx;
+  font-size: 27rpx;
   border: 1rpx solid rgb(183, 108, 37);
   border-radius: 10rpx;
-  padding: 10rpx 20rpx;
-  margin-right: 20rpx;
+  padding: 8rpx 16rpx;
+  margin-right: 16rpx;
 }
 
 .select-active {
@@ -371,8 +379,38 @@
   color: #ffffff;
   width: 80%;
   text-align: center;
-  font-size: 35rpx;
-  margin-top: 20rpx;
+  font-size: 32rpx;
+  margin-top: 30rpx;
   background-color: rgb(183, 108, 37);
   border-radius: 10rpx;
+}
+
+.toastup_cell{
+  z-index: 12;
+  width: 80%;
+  height: 300rpx;
+  background-color: #efefef;
+  border-radius: 20rpx;
+  position: fixed;
+  top: 40%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30rpx;
+}
+
+.toastup_cell_button{
+  border-bottom-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  padding: 15rpx 0;
+  width: 100%;
+  font-size: 40rpx;
+  background-color: rgb(183, 108, 37);
+  color: #ffffff;
+  font-weight: 550;
+  text-align: center;
 }
